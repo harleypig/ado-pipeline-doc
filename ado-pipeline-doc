@@ -12,7 +12,6 @@ def warn(message, exit_code=None):
         sys.exit(exit_code)
 
 #-----------------------------------------------------------------------------
-# Exceptions should exit instead of returning, AI!
 def load_yaml_file(yaml_file_path):
     try:
         with open(yaml_file_path, 'r') as file:
@@ -22,16 +21,13 @@ def load_yaml_file(yaml_file_path):
             return data
 
     except FileNotFoundError:
-        print(f"Error: The file {yaml_file_path} was not found.")
-        raise
+        warn(f"Error: The file {yaml_file_path} was not found.", exit_code=1)
 
     except PermissionError:
-        print(f"Error: Permission denied for file {yaml_file_path}.")
-        raise
+        warn(f"Error: Permission denied for file {yaml_file_path}.", exit_code=1)
 
     except yaml.YAMLError as exc:
-        print(f"Error parsing YAML file: {exc}")
-        raise
+        warn(f"Error parsing YAML file: {exc}", exit_code=1)
 
 #-----------------------------------------------------------------------------
 def parse_yaml_to_markdown(yaml_file_path):
