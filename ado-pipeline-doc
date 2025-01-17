@@ -17,13 +17,13 @@ class ADOPipelineDoc:
         self.load_file()
         self.get_parameters()
 
-# Update the documentation to match the current state of the function, AI!
     def load_file(self):
         """
         Loads the YAML file specified by the filename attribute and stores its parsed contents in the data attribute.
 
         Raises:
-            ADOPipelineDocException: If the file cannot be accessed, or if there is an error in parsing the YAML content.
+            ADOPipelineDocException: If the file cannot be accessed, if the YAML file is empty or contains null data,
+            if the YAML file has no parameters, or if there is an error in parsing the YAML content.
         """
         try:
             with open(self.filename, 'r') as file:
