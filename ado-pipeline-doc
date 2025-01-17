@@ -14,6 +14,7 @@ class ADOPipelineDoc:
         if self.filename is not None:
             self.load_file()
 
+# Raise an ado exception if filename is not set and update documentation for the function, AI!
     def load_file(self):
         """
         Loads a YAML file and returns its contents as a Python dictionary.
