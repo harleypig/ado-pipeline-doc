@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import yaml
+import markdown
 import sys
 
 class ADOPipelineDocException(Exception):
@@ -51,7 +52,6 @@ class ADOPipelineDoc:
     def process_data(self):
         parameters = self.get_parameters()
 
-# Use python-markdown to create the table, AI!
         # Prepare markdown table
         markdown_table = "| Name | Type | Default | Description |\n"
         markdown_table += "|------|------|---------|-------------|\n"
@@ -64,7 +64,9 @@ class ADOPipelineDoc:
 
             markdown_table += f"| {name} | {param_type} | {default} | {description} |\n"
 
-        return markdown_table
+        # Convert markdown table to HTML
+        html_table = markdown.markdown(markdown_table, extensions=['markdown.extensions.tables'])
+        return html_table
 
 # Example usage
 yaml_processor = ADOPipelineDoc('azure-pipelines.yml')  # Replace with your YAML file path
