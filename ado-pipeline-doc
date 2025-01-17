@@ -19,10 +19,10 @@ class ADOPipelineDoc:
 
     def load_file(self):
         """
-        Loads the YAML file specified by the filename attribute and stores its contents in the content attribute.
+        Loads the YAML file specified by the filename attribute and stores its parsed contents in the content attribute.
 
         Raises:
-            ADOPipelineDocException: If the filename is not set, if the file cannot be accessed, or if there is an error in parsing the YAML content.
+            ADOPipelineDocException: If the file cannot be accessed, or if there is an error in parsing the YAML content.
         """
         try:
             with open(self.filename, 'r') as file:
@@ -31,6 +31,7 @@ class ADOPipelineDoc:
                 if data is None:
                     raise ADOPipelineDocException("YAML file is empty or contains null data.")
 
+# Rename content to data, AI!
                 self.content = data
 
         except FileNotFoundError:
