@@ -27,6 +27,8 @@ class ADOPipelineDoc:
         if not self.filename:
             raise ADOPipelineDocException("Filename is not set.")
 
+# If content has already been loaded just return,  AI!
+
         try:
             with open(self.filename, 'r') as file:
                 data = yaml.safe_load(file)
@@ -59,7 +61,8 @@ class ADOPipelineDoc:
 
         if not parameters:
             raise ADOPipelineDocException("No parameters found.")
-        return parameters
+
+        self.parameters = parameters
 
     def process_data(self):
         self.load_file()
