@@ -3,8 +3,7 @@
 import yaml
 import sys
 
-# Rename this class to ADOPipelineDocException, AI!
-class WarningException(Exception):
+class ADOPipelineDocException(Exception):
     """Custom exception class for warnings with an optional exit code."""
 
     def __init__(self, message, ec=None):
@@ -18,8 +17,8 @@ class WarningException(Exception):
             sys.exit(self.ec)
 
     def warn(self, message, ec=Nondef warn(self, message, ec=None):
-        """Raises a WarningException with the given message and exit code."""
-        raise WarningException(message, ec)
+        """Raises an ADOPipelineDocException with the given message and exit code."""
+        raise ADOPipelineDocException(message, ec)
 
 
 class ADOPipelineDoc:
@@ -55,19 +54,19 @@ class ADOPipelineDoc:
         except FileNotFoundError:
             try:
                 self.warn(f"Error: The file {self.yaml_file_path} was not found.", ec=1)
-            except WarningException as e:
+            except ADOPipelineDocException as e:
                 e.handle()
 
         except PermissionError:
             try:
                 self.warn(f"Error: Permission denied for file {self.yaml_file_path}.", ec=1)
-            except WarningException as e:
+            except ADOPipelineDocException as e:
                 e.handle()
 
         except yaml.YAMLError as exc:
             try:
                 self.warn(f"Error parsing YAML file: {exc}", ec=1)
-            except WarningException as e:
+            except ADOPipelineDocException as e:
                 e.handle()
 
     def get_parameters(self):
@@ -85,7 +84,7 @@ class ADOPipelineDoc:
         if not parameters:
             try:
                 self.warn("No parameters found.", ec=1)
-            except WarningException as e:
+            except ADOPipelineDocException as e:
                 e.handle()
 0jk
         return parameters
