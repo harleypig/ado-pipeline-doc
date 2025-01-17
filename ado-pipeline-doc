@@ -2,12 +2,12 @@
 
 import yaml
 
-# Move the open file routine to it's own function, AI!
+def load_yaml_file(yaml_file_path):
+    with open(yaml_file_path, 'r') as file:
+        return yaml.safe_load(file)
 
 def parse_yaml_to_markdown(yaml_file_path):
-    # Load the YAML file
-    with open(yaml_file_path, 'r') as file:
-        yaml_content = yaml.safe_load(file)
+    yaml_content = load_yaml_file(yaml_file_path)
 
     # Extract parameters
     parameters = yaml_content.get('parameters', [])
