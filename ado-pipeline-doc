@@ -7,10 +7,12 @@ import sys
 def warn(message, exit_code=None):
     """Prints an error message to stderr and optionally exits with the given error code."""
     print(message, file=sys.stderr)
+
     if exit_code is not None:
         sys.exit(exit_code)
 
 #-----------------------------------------------------------------------------
+# Exceptions should exit instead of returning, AI!
 def load_yaml_file(yaml_file_path):
     try:
         with open(yaml_file_path, 'r') as file:
