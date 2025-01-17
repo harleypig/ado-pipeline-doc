@@ -3,6 +3,7 @@
 import yaml
 import sys
 
+# Change the class name to ADOPipelineDoc, AI!
 class YamlProcessor:
     def __init__(self, yaml_file_path):
         self.yaml_file_path = yaml_file_path
