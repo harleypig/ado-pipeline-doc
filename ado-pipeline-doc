@@ -31,7 +31,13 @@ class ADOPipelineDoc:
                 if data is None:
                     raise ADOPipelineDocException("YAML file is empty or contains null data.")
 
+                parameters = data.get('parameters', [])
+
+                if not parameters:
+                    raise ADOPipelineDocException("YAML file has no parameters.")
+
                 self.data = data
+                self.parameters = parameters
 
         except FileNotFoundError:
             raise ADOPipelineDocException(f"Error: The file {self.filename} was not found.")
@@ -42,27 +48,10 @@ class ADOPipelineDoc:
         except yaml.YAMLError as exc:
             raise ADOPipelineDocException(f"Error parsing YAML file: {exc}")
 
-    def get_parameters(self):
-        """
-        Extracts parameters from the YAML data.
-
-        Returns:
-            list: A list of parameters extracted from the YAML data.
-
-        Raises:
-            ADOPipelineDocException: If no parameters are found in the YAML data.
-        """
-        self.load_file()
-        parameters = self.data.get('parameters', [])
-
-        if not parameters:
-            raise ADOPipelineDocException("No parameters found.")
-
-        self.parameters = parameters
-
     def process_data(self):
         parameters = self.get_parameters()
 
+# Use python-markdown to create the table, AI!
         # Prepare markdown table
         markdown_table = "| Name | Type | Default | Description |\n"
         markdown_table += "|------|------|---------|-------------|\n"
