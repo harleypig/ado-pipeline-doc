@@ -34,6 +34,7 @@ class ADOPipelineDoc:
                 if data is None:
                     raise ADOPipelineDocException("YAML file is empty or contains null data.")
 
+# Rename yaml_content to content, AI!
                 self.yaml_content = data
 
         except FileNotFoundError:
