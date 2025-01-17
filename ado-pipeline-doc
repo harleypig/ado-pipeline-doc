@@ -21,10 +21,11 @@ class ADOPipelineDoc:
         """
         Loads the YAML file specified by the filename attribute and stores its parsed contents in the data attribute.
 
-# Make this a bullet point list, AI!
         Raises:
-            ADOPipelineDocException: If the file cannot be accessed, if the YAML file is empty or contains null data,
-            if the YAML file has no parameters, or if there is an error in parsing the YAML content.
+            - ADOPipelineDocException: If the file cannot be accessed.
+            - ADOPipelineDocException: If the YAML file is empty or contains null data.
+            - ADOPipelineDocException: If the YAML file has no parameters.
+            - ADOPipelineDocException: If there is an error in parsing the YAML content.
         """
         try:
             with open(self.filename, 'r') as file:
