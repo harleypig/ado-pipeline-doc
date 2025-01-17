@@ -17,16 +17,12 @@ class ADOPipelineDoc:
         self.load_file()
         self.get_parameters()
 
-# Update the documentation for this function, AI!
     def load_file(self):
         """
-        Loads a YAML file and returns its contents as a Python dictionary.
-
-        Returns:
-            dict: The contents of the YAML file.
+        Loads the YAML file specified by the filename attribute and stores its contents in the content attribute.
 
         Raises:
-            ADOPipelineDocException: If the filename is not set or if there is an error related to file access or YAML parsing.
+            ADOPipelineDocException: If the filename is not set, if the file cannot be accessed, or if there is an error in parsing the YAML content.
         """
         try:
             with open(self.filename, 'r') as file:
