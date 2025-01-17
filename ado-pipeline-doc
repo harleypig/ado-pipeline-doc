@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import yaml
-import markdown
 import sys
 
 class ADOPipelineDocException(Exception):
@@ -13,11 +12,12 @@ class ADOPipelineDoc:
         self.data = None
 
         if self.filename is None:
-            raise ADOPipelineDocException("Filename must be provided.")
+            raise ADOPipelineDocException("Filename must be provided to ADOPipelineDoc.")
 
         self.load_file()
         self.get_parameters()
 
+# Update the documentation to match the current state of the function, AI!
     def load_file(self):
         """
         Loads the YAML file specified by the filename attribute and stores its parsed contents in the data attribute.
@@ -64,9 +64,7 @@ class ADOPipelineDoc:
 
             markdown_table += f"| {name} | {param_type} | {default} | {description} |\n"
 
-        # Convert markdown table to HTML
-        html_table = markdown.markdown(markdown_table, extensions=['markdown.extensions.tables'])
-        return html_table
+        return markdown_table
 
 # Example usage
 yaml_processor = ADOPipelineDoc('azure-pipelines.yml')  # Replace with your YAML file path
