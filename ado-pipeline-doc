@@ -4,6 +4,7 @@ import yaml
 import sys
 
 #-----------------------------------------------------------------------------
+# Rename exit_code to ec, AI!
 def warn(message, exit_code=None):
     """Prints an error message to stderr and optionally exits with the given error code."""
     print(message, file=sys.stderr)
