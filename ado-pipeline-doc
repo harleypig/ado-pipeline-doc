@@ -7,9 +7,11 @@ class ADOPipelineDoc:
     def __init__(self, yaml_file_path=None):
         self.yaml_file_path = yaml_file_path
         self.yaml_content = None
+
         if self.yaml_file_path is not None:
             self.load_file()
 
+    # Make warn a separate error class, AI!
     def warn(self, message, ec=None):
         """Prints an error message to stderr and optionally exits with the given error code."""
         print(message, file=sys.stderr)
