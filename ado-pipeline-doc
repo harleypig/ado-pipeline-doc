@@ -47,10 +47,10 @@ class ADOPipelineDoc:
         Extracts parameters from the YAML data.
 
         Returns:
-            list: A list of parameters extracted from the YAML content.
+            list: A list of parameters extracted from the YAML data.
 
         Raises:
-            ADOPipelineDocException: If no parameters are found in the YAML content.
+            ADOPipelineDocException: If no parameters are found in the YAML data.
         """
         self.load_file()
         parameters = self.data.get('parameters', [])
