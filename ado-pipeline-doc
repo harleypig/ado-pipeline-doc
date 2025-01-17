@@ -11,7 +11,8 @@ class ADOPipelineDoc:
         self.filename = filename
         self.content = None
 
-        # Raise an error if filename is not passed, AI!
+        if self.filename is None:
+            raise ADOPipelineDocException("Filename must be provided.")
 
         if self.filename is not None:
             self.load_file()
