@@ -4,10 +4,10 @@ import yaml
 import sys
 
 class ADOPipelineDoc:
-    # Load the file if it's passed in, AI!
     def __init__(self, yaml_file_path):
         self.yaml_file_path = yaml_file_path
         self.yaml_content = None
+        self.load_file()
 
     def warn(self, message, ec=None):
         """Prints an error message to stderr and optionally exits with the given error code."""
