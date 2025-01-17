@@ -3,14 +3,7 @@
 import yaml
 import sys
 
-class ADOPipelineDoc:
-    def __init__(self, yaml_file_path=None):
-        self.yaml_file_path = yaml_file_path
-        self.yaml_content = None
-
-        if self.yaml_file_path is not None:
-            self.load_file()
-
+# Rename this class to ADOPipelineDocException, AI!
 class WarningException(Exception):
     """Custom exception class for warnings with an optional exit code."""
 
@@ -24,9 +17,18 @@ class WarningException(Exception):
         if self.ec is not None:
             sys.exit(self.ec)
 
-def warn(self, message, ec=Nondef warn(self, message, ec=None):
+    def warn(self, message, ec=Nondef warn(self, message, ec=None):
         """Raises a WarningException with the given message and exit code."""
         raise WarningException(message, ec)
+
+
+class ADOPipelineDoc:
+    def __init__(self, yaml_file_path=None):
+        self.yaml_file_path = yaml_file_path
+        self.yaml_content = None
+
+        if self.yaml_file_path is not None:
+            self.load_file()
 
     def load_file(self):
         """
