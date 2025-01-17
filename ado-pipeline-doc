@@ -9,7 +9,7 @@ class ADOPipelineDocException(Exception):
 class ADOPipelineDoc:
     def __init__(self, filename=None):
         self.filename = filename
-        self.content = None
+        self.data = None
 
         if self.filename is None:
             raise ADOPipelineDocException("Filename must be provided.")
@@ -19,7 +19,7 @@ class ADOPipelineDoc:
 
     def load_file(self):
         """
-        Loads the YAML file specified by the filename attribute and stores its parsed contents in the content attribute.
+        Loads the YAML file specified by the filename attribute and stores its parsed contents in the data attribute.
 
         Raises:
             ADOPipelineDocException: If the file cannot be accessed, or if there is an error in parsing the YAML content.
@@ -31,8 +31,7 @@ class ADOPipelineDoc:
                 if data is None:
                     raise ADOPipelineDocException("YAML file is empty or contains null data.")
 
-# Rename content to data, AI!
-                self.content = data
+                self.data = data
 
         except FileNotFoundError:
             raise ADOPipelineDocException(f"Error: The file {self.filename} was not found.")
@@ -45,7 +44,7 @@ class ADOPipelineDoc:
 
     def get_parameters(self):
         """
-        Extracts parameters from the YAML content.
+        Extracts parameters from the YAML data.
 
         Returns:
             list: A list of parameters extracted from the YAML content.
@@ -54,7 +53,7 @@ class ADOPipelineDoc:
             ADOPipelineDocException: If no parameters are found in the YAML content.
         """
         self.load_file()
-        parameters = self.content.get('parameters', [])
+        parameters = self.data.get('parameters', [])
 
         if not parameters:
             raise ADOPipelineDocException("No parameters found.")
