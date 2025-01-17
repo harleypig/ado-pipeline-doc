@@ -14,10 +14,10 @@ class ADOPipelineDoc:
         if self.filename is None:
             raise ADOPipelineDocException("Filename must be provided.")
 
-        if self.filename is not None:
-            self.load_file()
-            self.get_parameters()
+        self.load_file()
+        self.get_parameters()
 
+# Update the documentation for this function, AI!
     def load_file(self):
         """
         Loads a YAML file and returns its contents as a Python dictionary.
@@ -28,12 +28,6 @@ class ADOPipelineDoc:
         Raises:
             ADOPipelineDocException: If the filename is not set or if there is an error related to file access or YAML parsing.
         """
-        if not self.filename:
-            raise ADOPipelineDocException("Filename is not set.")
-
-        if self.content is not None:
-            return
-
         try:
             with open(self.filename, 'r') as file:
                 data = yaml.safe_load(file)
