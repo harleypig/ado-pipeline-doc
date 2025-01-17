@@ -4,6 +4,7 @@ import yaml
 import sys
 
 class ADOPipelineDoc:
+    # Only load the file if yaml_file_path is not none. Default to none, AI!
     def __init__(self, yaml_file_path):
         self.yaml_file_path = yaml_file_path
         self.yaml_content = None
