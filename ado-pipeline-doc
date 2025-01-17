@@ -11,21 +11,20 @@ class ADOPipelineDoc:
         if self.yaml_file_path is not None:
             self.load_file()
 
-# Make this an external class in this same file, AI!
-    class WarningException(Exception):
-        """Custom exception class for warnings with an optional exit code."""
+class WarningException(Exception):
+    """Custom exception class for warnings with an optional exit code."""
 
-        def __init__(self, message, ec=None):
-            super().__init__(message)
-            self.ec = ec
+    def __init__(self, message, ec=None):
+        super().__init__(message)
+        self.ec = ec
 
-        def handle(self):
-            """Handle the warning by printing the message and exiting if an exit code is provided."""
-            print(self.args[0], file=sys.stderr)
-            if self.ec is not None:
-                sys.exit(self.ec)
+    def handle(self):
+        """Handle the warning by printing the message and exiting if an exit code is provided."""
+        print(self.args[0], file=sys.stderr)
+        if self.ec is not None:
+            sys.exit(self.ec)
 
-    def warn(self, message, ec=None):
+def warn(self, message, ec=Nondef warn(self, message, ec=None):
         """Raises a WarningException with the given message and exit code."""
         raise WarningException(message, ec)
 
