@@ -50,6 +50,7 @@ def load_file(yaml_file_path):
 def process_data(yaml_file_path):
     yaml_content = load_file(yaml_file_path)
 
+# move parameter retrieval to it's own function, AI!
     parameters = yaml_content.get('parameters', [])
 
     if not parameters:
