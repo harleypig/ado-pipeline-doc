@@ -11,6 +11,8 @@ class ADOPipelineDoc:
         self.filename = filename
         self.content = None
 
+        # Raise an error if filename is not passed, AI!
+
         if self.filename is not None:
             self.load_file()
             self.get_parameters()
@@ -59,6 +61,7 @@ class ADOPipelineDoc:
         Raises:
             ADOPipelineDocException: If no parameters are found in the YAML content.
         """
+        self.load_file()
         parameters = self.content.get('parameters', [])
 
         if not parameters:
@@ -67,7 +70,6 @@ class ADOPipelineDoc:
         self.parameters = parameters
 
     def process_data(self):
-        self.load_file()
         parameters = self.get_parameters()
 
         # Prepare markdown table
