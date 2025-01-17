@@ -6,13 +6,12 @@ import sys
 class ADOPipelineDocException(Exception):
     pass
 
-# Rename yaml_file_path to filename, AI!
 class ADOPipelineDoc:
-    def __init__(self, yaml_file_path=None):
-        self.yaml_file_path = yaml_file_path
+    def __init__(self, filename=None):
+        self.filename = filename
         self.yaml_content = None
 
-        if self.yaml_file_path is not None:
+        if self.filename is not None:
             self.load_file()
 
     def load_file(self):
@@ -26,7 +25,7 @@ class ADOPipelineDoc:
             ADOPipelineDocException: If there is an error related to file access or YAML parsing.
         """
         try:
-            with open(self.yaml_file_path, 'r') as file:
+            with open(self.filename, 'r') as file:
                 data = yaml.safe_load(file)
 
                 if data is None:
@@ -35,10 +34,10 @@ class ADOPipelineDoc:
                 self.yaml_content = data
 
         except FileNotFoundError:
-            raise ADOPipelineDocException(f"Error: The file {self.yaml_file_path} was not found.")
+            raise ADOPipelineDocException(f"Error: The file {self.filename} was not found.")
 
         except PermissionError:
-            raise ADOPipelineDocException(f"Error: Permission denied for file {self.yaml_file_path}.")
+            raise ADOPipelineDocException(f"Error: Permission denied for file {self.filename}.")
 
         except yaml.YAMLError as exc:
             raise ADOPipelineDocException(f"Error parsing YAML file: {exc}")
