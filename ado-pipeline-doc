@@ -6,6 +6,7 @@ import sys
 class ADOPipelineDocException(Exception):
     pass
 
+# Rename yaml_file_path to filename, AI!
 class ADOPipelineDoc:
     def __init__(self, yaml_file_path=None):
         self.yaml_file_path = yaml_file_path
