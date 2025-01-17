@@ -27,7 +27,8 @@ class ADOPipelineDoc:
         if not self.filename:
             raise ADOPipelineDocException("Filename is not set.")
 
-# If content has already been loaded just return,  AI!
+        if self.content is not None:
+            return
 
         try:
             with open(self.filename, 'r') as file:
