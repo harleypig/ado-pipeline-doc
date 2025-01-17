@@ -11,13 +11,22 @@ class ADOPipelineDoc:
         if self.yaml_file_path is not None:
             self.load_file()
 
-    # Make warn a separate error class, AI!
-    def warn(self, message, ec=None):
-        """Prints an error message to stderr and optionally exits with the given error code."""
-        print(message, file=sys.stderr)
+    class WarningException(Exception):
+        """Custom exception class for warnings with an optional exit code."""
 
-        if ec is not None:
-            sys.exit(ec)
+        def __init__(self, message, ec=None):
+            super().__init__(message)
+            self.ec = ec
+
+        def handle(self):
+            """Handle the warning by printing the message and exiting if an exit code is provided."""
+            print(self.args[0], file=sys.stderr)
+            if self.ec is not None:
+                sys.exit(self.ec)
+
+    def warn(self, message, ec=None):
+        """Raises a WarningException with the given message and exit code."""
+        raise WarningException(message, ec)
 
     def load_file(self):
         """
@@ -42,13 +51,22 @@ class ADOPipelineDoc:
                 self.yaml_content = data
 
         except FileNotFoundError:
-            self.warn(f"Error: The file {self.yaml_file_path} was not found.", ec=1)
+            try:
+                self.warn(f"Error: The file {self.yaml_file_path} was not found.", ec=1)
+            except WarningException as e:
+                e.handle()
 
         except PermissionError:
-            self.warn(f"Error: Permission denied for file {self.yaml_file_path}.", ec=1)
+            try:
+                self.warn(f"Error: Permission denied for file {self.yaml_file_path}.", ec=1)
+            except WarningException as e:
+                e.handle()
 
         except yaml.YAMLError as exc:
-            self.warn(f"Error parsing YAML file: {exc}", ec=1)
+            try:
+                self.warn(f"Error parsing YAML file: {exc}", ec=1)
+            except WarningException as e:
+                e.handle()
 
     def get_parameters(self):
         """
@@ -63,7 +81,10 @@ class ADOPipelineDoc:
         parameters = self.yaml_content.get('parameters', [])
 
         if not parameters:
-            self.warn("No parameters found.", ec=1)
+            try:
+                self.warn("No parameters found.", ec=1)
+            except WarningException as e:
+                e.handle()
 
         return parameters
 
