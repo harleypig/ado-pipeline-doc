@@ -50,7 +50,7 @@ def load_file(yaml_file_path):
 def parse_yaml_to_markdown(yaml_file_path):
     yaml_content = load_file(yaml_file_path)
 
-    # Extract parameters
+    # Extract parameters. If there are no parameters then exit with a message to stderr, AI!
     parameters = yaml_content.get('parameters', [])
 
     # Prepare markdown table
