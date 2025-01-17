@@ -12,8 +12,22 @@ def warn(message, ec=None):
         sys.exit(ec)
 
 #-----------------------------------------------------------------------------
-# Document load_file, please, AI!
 def load_file(yaml_file_path):
+    """
+    Loads a YAML file and returns its contents as a Python dictionary.
+
+    Args:
+        yaml_file_path (str): The path to the YAML file to be loaded.
+
+    Returns:
+        dict: The contents of the YAML file.
+
+    Raises:
+        FileNotFoundError: If the file does not exist.
+        PermissionError: If there is a permission issue accessing the file.
+        ValueError: If the YAML file is empty or contains null data.
+        yaml.YAMLError: If there is an error parsing the YAML file.
+    """
     try:
         with open(yaml_file_path, 'r') as file:
             data = yaml.safe_load(file)
