@@ -47,8 +47,7 @@ def load_file(yaml_file_path):
         warn(f"Error parsing YAML file: {exc}", ec=1)
 
 #-----------------------------------------------------------------------------
-# Rename this function to process_data, AI!
-def parse_yaml_to_markdown(yaml_file_path):
+def process_data(yaml_file_path):
     yaml_content = load_file(yaml_file_path)
 
     parameters = yaml_content.get('parameters', [])
@@ -72,5 +71,5 @@ def parse_yaml_to_markdown(yaml_file_path):
 
 # Example usage
 yaml_file_path = 'azure-pipelines.yml'  # Replace with your YAML file path
-markdown_output = parse_yaml_to_markdown(yaml_file_path)
+markdown_output = process_data(yaml_file_path)
 print(markdown_output)
