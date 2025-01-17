@@ -4,21 +4,9 @@ import yaml
 import sys
 
 class ADOPipelineDocException(Exception):
-    """Custom exception class for warnings with an optional exit code."""
+    pass
 
-    def __init__(self, message, ec=None):
-        super().__init__(message)
-        self.ec = ec
-
-    def handle(self):
-        """Handle the warning by printing the message and exiting if an exit code is provided."""
-        print(self.args[0], file=sys.stderr)
-        if self.ec is not None:
-            sys.exit(self.ec)
-
-    def warn(self, message, ec=None):
-        """Raises an ADOPipelineDocException with the given message and exit code."""
-        raise ADOPipelineDocException(message, ec)
+# Fix exceptions to just raise ADOPipelineDocException, AI!
 class ADOPipelineDoc:
     def __init__(self, yaml_file_path=None):
         self.yaml_file_path = yaml_file_path
