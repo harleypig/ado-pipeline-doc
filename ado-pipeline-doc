@@ -3,8 +3,7 @@
 import yaml
 import sys
 
-# Change the class name to ADOPipelineDoc, AI!
-class YamlProcessor:
+class ADOPipelineDoc:
     def __init__(self, yaml_file_path):
         self.yaml_file_path = yaml_file_path
         self.yaml_content = None
@@ -83,6 +82,6 @@ class YamlProcessor:
         return markdown_table
 
 # Example usage
-yaml_processor = YamlProcessor('azure-pipelines.yml')  # Replace with your YAML file path
+yaml_processor = ADOPipelineDoc('azure-pipelines.yml')  # Replace with your YAML file path
 markdown_output = yaml_processor.process_data()
 print(markdown_output)
