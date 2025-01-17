@@ -4,7 +4,8 @@ import yaml
 import sys
 
 #-----------------------------------------------------------------------------
-def print_error_and_exit(message, exit_code=1):
+# exit_code is optional, if it's not passed then the function should return instead of exiting, AI!
+def warn(message, exit_code=1):
     """Prints an error message to stderr and exits with the given error code."""
     print(message, file=sys.stderr)
     sys.exit(exit_code)
