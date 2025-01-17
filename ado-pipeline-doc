@@ -4,13 +4,12 @@ import yaml
 import sys
 
 #-----------------------------------------------------------------------------
-# Rename exit_code to ec, AI!
-def warn(message, exit_code=None):
+def warn(message, ec=None):
     """Prints an error message to stderr and optionally exits with the given error code."""
     print(message, file=sys.stderr)
 
-    if exit_code is not None:
-        sys.exit(exit_code)
+    if ec is not None:
+        sys.exit(ec)
 
 #-----------------------------------------------------------------------------
 def load_yaml_file(yaml_file_path):
@@ -22,13 +21,13 @@ def load_yaml_file(yaml_file_path):
             return data
 
     except FileNotFoundError:
-        warn(f"Error: The file {yaml_file_path} was not found.", exit_code=1)
+        warn(f"Error: The file {yaml_file_path} was not found.", ec=1)
 
     except PermissionError:
-        warn(f"Error: Permission denied for file {yaml_file_path}.", exit_code=1)
+        warn(f"Error: Permission denied for file {yaml_file_path}.", ec=1)
 
     except yaml.YAMLError as exc:
-        warn(f"Error parsing YAML file: {exc}", exit_code=1)
+        warn(f"Error parsing YAML file: {exc}", ec=1)
 
 #-----------------------------------------------------------------------------
 def parse_yaml_to_markdown(yaml_file_path):
