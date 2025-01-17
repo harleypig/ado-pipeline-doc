@@ -11,6 +11,7 @@ class ADOPipelineDoc:
         if self.yaml_file_path is not None:
             self.load_file()
 
+# Make this an external class in this same file, AI!
     class WarningException(Exception):
         """Custom exception class for warnings with an optional exit code."""
 
@@ -85,7 +86,7 @@ class ADOPipelineDoc:
                 self.warn("No parameters found.", ec=1)
             except WarningException as e:
                 e.handle()
-
+0jk
         return parameters
 
     def process_data(self):
