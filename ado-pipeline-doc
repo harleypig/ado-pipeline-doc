@@ -6,7 +6,6 @@ import sys
 class ADOPipelineDocException(Exception):
     pass
 
-# Fix exceptions to just raise ADOPipelineDocException, AI!
 class ADOPipelineDoc:
     def __init__(self, yaml_file_path=None):
         self.yaml_file_path = yaml_file_path
@@ -23,37 +22,25 @@ class ADOPipelineDoc:
             dict: The contents of the YAML file.
 
         Raises:
-            FileNotFoundError: If the file does not exist.
-            PermissionError: If there is a permission issue accessing the file.
-            ValueError: If the YAML file is empty or contains null data.
-            yaml.YAMLError: If there is an error parsing the YAML file.
+            ADOPipelineDocException: If there is an error related to file access or YAML parsing.
         """
         try:
             with open(self.yaml_file_path, 'r') as file:
                 data = yaml.safe_load(file)
 
                 if data is None:
-                    raise ValueError("YAML file is empty or contains null data.")
+                    raise ADOPipelineDocException("YAML file is empty or contains null data.")
 
                 self.yaml_content = data
 
         except FileNotFoundError:
-            try:
-                self.warn(f"Error: The file {self.yaml_file_path} was not found.", ec=1)
-            except ADOPipelineDocException as e:
-                e.handle()
+            raise ADOPipelineDocException(f"Error: The file {self.yaml_file_path} was not found.")
 
         except PermissionError:
-            try:
-                self.warn(f"Error: Permission denied for file {self.yaml_file_path}.", ec=1)
-            except ADOPipelineDocException as e:
-                e.handle()
+            raise ADOPipelineDocException(f"Error: Permission denied for file {self.yaml_file_path}.")
 
         except yaml.YAMLError as exc:
-            try:
-                self.warn(f"Error parsing YAML file: {exc}", ec=1)
-            except ADOPipelineDocException as e:
-                e.handle()
+            raise ADOPipelineDocException(f"Error parsing YAML file: {exc}")
 
     def get_parameters(self):
         """
@@ -63,16 +50,12 @@ class ADOPipelineDoc:
             list: A list of parameters extracted from the YAML content.
 
         Raises:
-            SystemExit: If no parameters are found in the YAML content.
+            ADOPipelineDocException: If no parameters are found in the YAML content.
         """
         parameters = self.yaml_content.get('parameters', [])
 
         if not parameters:
-            try:
-                self.warn("No parameters found.", ec=1)
-            except ADOPipelineDocException as e:
-                e.handle()
-0jk
+            raise ADOPipelineDocException("No parameters found.")
         return parameters
 
     def process_data(self):
