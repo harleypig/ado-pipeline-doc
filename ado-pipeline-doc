@@ -3,10 +3,22 @@
 import yaml
 
 #-----------------------------------------------------------------------------
-# Handle missing, bad permissions, and empty or null data, AI!
 def load_yaml_file(yaml_file_path):
-    with open(yaml_file_path, 'r') as file:
-        return yaml.safe_load(file)
+    try:
+        with open(yaml_file_path, 'r') as file:
+            data = yaml.safe_load(file)
+            if data is None:
+                raise ValueError("YAML file is empty or contains null data.")
+            return data
+    except FileNotFoundError:
+        print(f"Error: The file {yaml_file_path} was not found.")
+        raise
+    except PermissionError:
+        print(f"Error: Permission denied for file {yaml_file_path}.")
+        raise
+    except yaml.YAMLError as exc:
+        print(f"Error parsing YAML file: {exc}")
+        raise
 
 #-----------------------------------------------------------------------------
 def parse_yaml_to_markdown(yaml_file_path):
