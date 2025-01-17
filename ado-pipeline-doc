@@ -11,6 +11,7 @@ class ADOPipelineDoc:
         self.filename = filename
         self.content = None
 
+# If load_file is successful the get parameters, AI!
         if self.filename is not None:
             self.load_file()
 
