@@ -92,8 +92,7 @@ class ADOPipelineDoc:
             raise ADOPipelineDocException("The provided object is not a dictionary.")
 
         if key is not None:
-          # Raise an error separately if obj is not a dict, AI!
-            if not isinstance(obj, dict) or key not in obj:
+            if key not in obj:
                 raise ADOPipelineDocException(f"Key '{key}' not found in the object.")
 
             return yaml.dump(obj[key], default_flow_style=False).strip().replace('\n', '<br/>')
