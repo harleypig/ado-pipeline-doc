@@ -90,8 +90,8 @@ class ADOPipelineDoc:
 
         heading_separator = {
           "required": ":-:",
-          "name": "--:",
-          "type": "--:",
+          "name": ":--",
+          "type": ":--",
           "displayName": ":--",
           "values": ":--",
           "default": ":--"
@@ -131,6 +131,7 @@ class ADOPipelineDoc:
                 use_col["default"] = True
                 row_object["required"] = ''
 
+# Create a method called prettify that accepts a key and an object and returns a string as in the two following if statements, AI!
             if param.get('type') == 'object' and param.get('default'):
                 row_object['default'] = yaml.dump(param['default'], default_flow_style=False).strip().replace('\n', '<br/>')
 
@@ -175,5 +176,6 @@ class ADOPipelineDoc:
 
 
 if __name__ == "__main__":
-    yaml_processor = ADOPipelineDoc('azure-pipelines.yml')
-    yaml_processor.print_table_rows()
+    ADOPipelineDoc('azure-pipelines.yml').print_table_rows()
+    #yaml_processor = ADOPipelineDoc('azure-pipelines.yml')
+    #yaml_processor.print_table_rows()
