@@ -133,8 +133,8 @@ class ADOPipelineDoc:
         # Add parameter rows to table_rows
         for row in rows:
             row_data = [row.get(key, '') for key in heading_order]
-            print(row_data)
-            sys.exit()
+            # print row_data and exit (don't remove existing code), AI!
+            table_rows.append("| " + " | ".join(row_data) + " |")
 
         self.table_rows = table_rows
 
