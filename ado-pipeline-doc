@@ -71,14 +71,23 @@ class ADOPipelineDoc:
         markdown_table = "| Name | Type | Default | Description |\n"
         markdown_table += "|------|------|---------|-------------|\n"
 
-# Put each line in an array of either @required_rows or @optional_rows (depending on if default is set), AI!
+        required_rows = []
+        optional_rows = []
+
         for param in self.parameters:
             name = param.get('name', '')
             param_type = param.get('type', '')
             default = param.get('default', '')
             description = param.get('description', '')
 
-            markdown_table += f"| {name} | {param_type} | {default} | {description} |\n"
+            row = f"| {name} | {param_type} | {default} | {description} |\n"
+
+            if default:
+                optional_rows.append(row)
+            else:
+                required_rows.append(row)
+
+        markdown_table += ''.join(required_rows) + ''.join(optional_rows)
 
         # Convert markdown to HTML
         html_output = markdown.markdown(markdown_table)
