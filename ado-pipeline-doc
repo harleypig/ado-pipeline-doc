@@ -19,6 +19,7 @@ class ADOPipelineDocException(Exception):
     pass
 
 class ADOPipelineDoc:
+  # Add an outputfile option that defaults to None, AI!
     def __init__(self, inputfile=None):
         """
         Initializes the ADOPipelineDoc with a given YAML input file.
