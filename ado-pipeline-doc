@@ -115,7 +115,8 @@ class ADOPipelineDoc:
             if param.get('type') == 'object' and param.get('default'):
                 row_object['default'] = yaml.dump(param['default'], default_flow_style=False).strip()
 
-# if param.values is set, it needs to be stringified and pretty printed, AI!
+            if param.get('values'):
+                row_object['values'] = yaml.dump(param['values'], default_flow_style=False).strip()
             rows.append(row_object)
 
         for key, value in use_col.items():
