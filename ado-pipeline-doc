@@ -19,6 +19,7 @@ class ADOPipelineDocException(Exception):
     pass
 
 class ADOPipelineDoc:
+  # Rename filename to inputfile, AI!
     def __init__(self, filename=None):
         """
         Initializes the ADOPipelineDoc with a given YAML filename.
