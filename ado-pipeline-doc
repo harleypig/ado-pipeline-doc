@@ -105,7 +105,13 @@ class ADOPipelineDoc:
             else:
                 required_rows.append(row_object)
 
-# Outside the for loop above, for any key in use_col that is False, remove the corresponding element from title_order, optional_rows, and required_rows, AI!
+        for key, value in use_col.items():
+            if not value:
+                title_order.remove(key)
+                for row in optional_rows:
+                    row.pop(key, None)
+                for row in required_rows:
+                    row.pop(key, None)
 
 #markdown_table = "| Name | Type | Default | Description |\n"
 #markdown_table += "|------|------|---------|-------------|\n"
