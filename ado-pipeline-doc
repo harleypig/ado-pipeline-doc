@@ -74,7 +74,6 @@ class ADOPipelineDoc:
         required_rows = []
         optional_rows = []
 
-# Save the param object in the appropriate array, AI!
         for param in self.parameters:
             name = param.get('name', '')
             param_type = param.get('type', '')
