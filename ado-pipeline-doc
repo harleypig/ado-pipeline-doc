@@ -88,8 +88,10 @@ class ADOPipelineDoc:
         Returns:
             str: A pretty-printed string representation of the object.
         """
+        # Raise an error if key is passed but is not in object, AI!
         if key is not None and isinstance(obj, dict) and key in obj:
             return yaml.dump(obj[key], default_flow_style=False).strip().replace('\n', '<br/>')
+
         return yaml.dump(obj, default_flow_style=False).strip().replace('\n', '<br/>')
 
     #-------------------------------------------------------------------------
