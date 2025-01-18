@@ -101,8 +101,7 @@ class ADOPipelineDoc:
         ADOPipelineDocException: If the key is not found in the object.
     """
     if key is not None:
-      # a dict should be displayed with curly brackets, AI!
-      pretty = yaml.dump(obj[key], default_flow_style=False)
+      pretty = yaml.dump(obj[key], default_flow_style=True)
 
     else:
       pretty = yaml.dump(obj, default_flow_style=False)
