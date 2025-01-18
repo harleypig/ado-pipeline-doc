@@ -51,14 +51,13 @@ class ADOPipelineDoc:
         except yaml.YAMLError as exc:
             raise ADOPipelineDocException(f"Error parsing YAML file: {exc}")
 
+# Use python-markdown to create the table, AI!
     def process_data(self):
-        parameters = self.get_parameters()
-
         # Prepare markdown table
         markdown_table = "| Name | Type | Default | Description |\n"
         markdown_table += "|------|------|---------|-------------|\n"
 
-        for param in parameters:
+        for param in self.parameters:
             name = param.get('name', '')
             param_type = param.get('type', '')
             default = param.get('default', '')
