@@ -19,6 +19,7 @@ class ADOPipelineDocException(Exception):
     pass
 
 class ADOPipelineDoc:
+  # Document the __init__ method, AI!
     def __init__(self, filename=None):
         self.filename = filename
         self.data = None
