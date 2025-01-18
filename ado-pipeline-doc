@@ -27,7 +27,7 @@ class ADOPipelineDoc:
             raise ADOPipelineDocException("Filename must be provided to ADOPipelineDoc.")
 
         self.load_file()
-        self.get_parameters()
+        self.process_data()
 
     def load_file(self):
         """
@@ -136,6 +136,8 @@ class ADOPipelineDoc:
             table_rows.append("| " + " | ".join(row_data) + " |")
 
         self.table_rows = table_rows
+
+# Add a function to this class the dumps out self.table_rows to stdout, AI!
 
 
 # Example usage
