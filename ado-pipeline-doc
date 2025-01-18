@@ -95,13 +95,14 @@ class ADOPipelineDoc:
             if param.get('values', ''):
                 use_col["values"] = True
 
-# Merge param into an object, using object_template as a pattern, AI!
-            if param.get('default', ''):
-                use_col["default"] = True
-                optional_rows.append(param)
+            param_object = object_template.copy()
+            param_object.update(param)
 
+            if param_object.get('default', ''):
+                use_col["default"] = True
+                optional_rows.append(param_object)
             else:
-                required_rows.append(param)
+                required_rows.append(param_object)
 
 #markdown_table = "| Name | Type | Default | Description |\n"
 #markdown_table += "|------|------|---------|-------------|\n"
