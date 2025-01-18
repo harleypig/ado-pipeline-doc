@@ -95,12 +95,14 @@ class ADOPipelineDoc:
             if param.get('values', ''):
                 use_col["values"] = True
 
+# rename param_object to row_object, AI!
             param_object = object_template.copy()
             param_object.update(param)
 
-            if param_object.get('default', ''):
+            if param.get('default', ''):
                 use_col["default"] = True
                 optional_rows.append(param_object)
+
             else:
                 required_rows.append(param_object)
 
