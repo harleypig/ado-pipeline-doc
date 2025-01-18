@@ -1,0 +1,51 @@
+parameters:
+  - name: stringParam
+    type: string
+    displayName: String Parameter
+    default: "defaultString"
+    values:
+      - "option1"
+      - "option2"
+
+  - name: numberParam
+    type: number
+    displayName: Number Parameter
+    default: 10
+    values:
+      - 5
+      - 10
+      - 15
+
+  - name: booleanParam
+    type: boolean
+    displayName: Boolean Parameter
+    default: true
+
+  - name: objectParam
+    type: object
+    displayName: Object Parameter
+    default:
+      key1: value1
+      key2: value2
+
+  - name: stringParamNoDefault
+    type: string
+    displayName: String Parameter No Default
+    values:
+      - "optionA"
+      - "optionB"
+
+  - name: numberParamNoDefault
+    type: number
+    displayName: Number Parameter No Default
+    values:
+      - 100
+      - 200
+
+  - name: booleanParamNoDefault
+    type: boolean
+    displayName: Boolean Parameter No Default
+
+  - name: objectParamNoDefault
+    type: object
+    displayName: Object Parameter No Default
