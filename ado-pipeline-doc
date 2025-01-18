@@ -131,12 +131,24 @@ class ADOPipelineDoc:
                 use_col["default"] = True
                 row_object["required"] = ''
 
-# Create a method called prettify that accepts a key and an object and returns a string as in the two following if statements, AI!
+    def prettify(self, key, obj):
+        """
+        Converts a given object to a pretty-printed string format.
+
+        Args:
+            key (str): The key associated with the object.
+            obj (any): The object to be converted to a string.
+
+        Returns:
+            str: A pretty-printed string representation of the object.
+        """
+        return yaml.dump(obj, default_flow_style=False).strip().replace('\n', '<br/>')
+
             if param.get('type') == 'object' and param.get('default'):
-                row_object['default'] = yaml.dump(param['default'], default_flow_style=False).strip().replace('\n', '<br/>')
+                row_object['default'] = self.prettify('default', param['default'])
 
             if param.get('values'):
-                row_object['values'] = yaml.dump(param['values'], default_flow_style=False).strip().replace('\n', '<br/>')
+                row_object['values'] = self.prettify('values', param['values'])
 
             rows.append(row_object)
 
