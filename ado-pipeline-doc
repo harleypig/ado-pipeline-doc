@@ -67,36 +67,50 @@ class ADOPipelineDoc:
         """
         Converts the parameters into a markdown table and then to HTML using python-markdown.
         """
-        # Prepare markdown table
-        markdown_table = "| Name | Type | Default | Description |\n"
-        markdown_table += "|------|------|---------|-------------|\n"
-
         required_rows = []
         optional_rows = []
 
-        for param in self.parameters:
-            name = param.get('name')
-            param_type = param.get('type')
-            default = param.get('default', '')
-            description = param.get('description', '')
+        object_template = {
+          "name": '',
+          "type": '',
+          "displayName": '',
+          "values": '',
+          "default": ''
+        }
 
-            if not name or not param_type:
+        use_col = {
+            "displayName": False,
+            "default": False,
+            "values": False
+        }
+        title_order = [ 'name', 'type', 'displayName', 'values', 'default' ]
+
+        for param in self.parameters:
+            if not param.name or not param.type:
                 raise ADOPipelineDocException(f"Parameter missing 'name' or 'type': {param}")
 
-            row = f"| {name} | {param_type} | {default} | {description} |\n"
+            if param.get('displayName', ''):
+              use_col["displayname"] = True
 
-            if default:
-                optional_rows.append(row)
+            if param.get('values', ''):
+                use_col["values"] = True
+
+# Merge param into an object, using object_template as a pattern, AI!
+            if param.get('default', ''):
+                use_col["default"] = True
+                optional_rows.append(param)
+
             else:
-                required_rows.append(row)
+                required_rows.append(param)
 
-#        name = param.get('name', '')
-#        param_type = param.get('type', '')
-#        default = param.get('default', '')
-#        description = param.get('description', '')
-#
-#        row = f"| {name} | {param_type} | {default} | {description} |\n"
-#        markdown_table += ''.join(required_rows) + ''.join(optional_rows)
+#markdown_table = "| Name | Type | Default | Description |\n"
+#markdown_table += "|------|------|---------|-------------|\n"
+#name = param.get('name', '')
+#param_type = param.get('type', '')
+#default = param.get('default', '')
+#description = param.get('description', '')
+#row = f"| {name} | {param_type} | {default} | {description} |\n"
+#markdown_table += ''.join(required_rows) + ''.join(optional_rows)
 
 # Example usage
 yaml_processor = ADOPipelineDoc('azure-pipelines.yml')  # Replace with your YAML file path
