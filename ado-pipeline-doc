@@ -88,6 +88,7 @@ class ADOPipelineDoc:
         Returns:
             str: A pretty-printed string representation of the object.
         """
+        # This function needs to return a prettified string of the object if no key is passed, or the value that matches the key if it is, AI!
         return yaml.dump(obj, default_flow_style=False).strip().replace('\n', '<br/>')
 
     #-------------------------------------------------------------------------
