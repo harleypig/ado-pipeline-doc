@@ -148,12 +148,11 @@ class ADOPipelineDoc:
                 use_col["default"] = True
                 row_object["required"] = ''
 
-# Fix these two functions to match the changed function. Be sure to keep the key, AI!
             if param.get('type') == 'object' and param.get('default'):
-                row_object['default'] = self.prettify('default', param['default'])
+                row_object['default'] = self.prettify(param['default'], key='default')
 
             if param.get('values'):
-                row_object['values'] = self.prettify('values', param['values'])
+                row_object['values'] = self.prettify(param['values'], key='values')
 
             rows.append(row_object)
 
