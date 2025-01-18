@@ -19,22 +19,21 @@ class ADOPipelineDocException(Exception):
     pass
 
 class ADOPipelineDoc:
-  # Rename filename to inputfile, AI!
-    def __init__(self, filename=None):
+    def __init__(self, inputfile=None):
         """
-        Initializes the ADOPipelineDoc with a given YAML filename.
+        Initializes the ADOPipelineDoc with a given YAML input file.
 
         Args:
-            filename (str): The path to the YAML file containing pipeline parameters.
+            inputfile (str): The path to the YAML file containing pipeline parameters.
 
         Raises:
-            ADOPipelineDocException: If no filename is provided.
+            ADOPipelineDocException: If no input file is provided.
         """
-        self.filename = filename
+        self.inputfile = inputfile
         self.data = None
 
-        if self.filename is None:
-            raise ADOPipelineDocException("Filename must be provided to ADOPipelineDoc.")
+        if self.inputfile is None:
+            raise ADOPipelineDocException("Input file must be provided to ADOPipelineDoc.")
 
         self.load_file()
         self.process_data()
@@ -50,7 +49,7 @@ class ADOPipelineDoc:
             - ADOPipelineDocException: If there is an error in parsing the YAML content.
         """
         try:
-            with open(self.filename, 'r') as file:
+            with open(self.inputfile, 'r') as file:
                 data = yaml.safe_load(file)
 
                 if data is None:
@@ -65,10 +64,10 @@ class ADOPipelineDoc:
                 self.parameters = parameters
 
         except FileNotFoundError:
-            raise ADOPipelineDocException(f"Error: The file {self.filename} was not found.")
+            raise ADOPipelineDocException(f"Error: The file {self.inputfile} was not found.")
 
         except PermissionError:
-            raise ADOPipelineDocException(f"Error: Permission denied for file {self.filename}.")
+            raise ADOPipelineDocException(f"Error: Permission denied for file {self.inputfile}.")
 
         except yaml.YAMLError as exc:
             raise ADOPipelineDocException(f"Error parsing YAML file: {exc}")
