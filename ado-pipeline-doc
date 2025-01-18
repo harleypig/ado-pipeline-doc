@@ -15,14 +15,17 @@
 import yaml
 import sys
 
+
 class ADOPipelineDocException(Exception):
-    pass
+  pass
+
 
 class ADOPipelineDoc:
-    #-------------------------------------------------------------------------
-    def __init__(self, inputfile=None, outputfile=None):
-        """
-        Initializes the ADOPipelineDoc with a given YAML input file and an optional output file.
+  #---------------------------------------------------------------------------
+  def __init__(self, inputfile=None, outputfile=None):
+    """
+        Initializes the ADOPipelineDoc with a given YAML input file and an
+        optional output file.
 
         Args:
             inputfile (str): The path to the YAML file containing pipeline parameters.
@@ -31,20 +34,22 @@ class ADOPipelineDoc:
         Raises:
             ADOPipelineDocException: If no input file is provided.
         """
-        self.inputfile = inputfile
-        self.outputfile = outputfile
-        self.data = None
+    self.inputfile = inputfile
+    self.outputfile = outputfile
+    self.data = None
 
-        if self.inputfile is None:
-            raise ADOPipelineDocException("Input file must be provided to ADOPipelineDoc.")
+    if self.inputfile is None:
+      raise ADOPipelineDocException(
+        "Input file must be provided to ADOPipelineDoc.")
 
-        self.load_file()
-        self.process_data()
+    self.load_file()
+    self.process_data()
 
-    #-------------------------------------------------------------------------
-    def load_file(self):
-        """
-        Loads the YAML file specified by the filename attribute and stores its parsed contents in the data attribute.
+  #---------------------------------------------------------------------------
+  def load_file(self):
+    """
+        Loads the YAML file specified by the filename attribute and stores its
+        parsed contents in the data attribute.
 
         Raises:
             - ADOPipelineDocException: If the file cannot be accessed.
@@ -52,33 +57,36 @@ class ADOPipelineDoc:
             - ADOPipelineDocException: If the YAML file has no parameters.
             - ADOPipelineDocException: If there is an error in parsing the YAML content.
         """
-        try:
-            with open(self.inputfile, 'r') as file:
-                data = yaml.safe_load(file)
+    try:
+      with open(self.inputfile, 'r') as file:
+        data = yaml.safe_load(file)
 
-                if data is None:
-                    raise ADOPipelineDocException("YAML file is empty or contains null data.")
+        if data is None:
+          raise ADOPipelineDocException(
+            "YAML file is empty or contains null data.")
 
-                parameters = data.get('parameters', [])
+        parameters = data.get('parameters', [])
 
-                if not parameters:
-                    raise ADOPipelineDocException("YAML file has no parameters.")
+        if not parameters:
+          raise ADOPipelineDocException("YAML file has no parameters.")
 
-                self.data = data
-                self.parameters = parameters
+        self.data = data
+        self.parameters = parameters
 
-        except FileNotFoundError:
-            raise ADOPipelineDocException(f"Error: The file {self.inputfile} was not found.")
+    except FileNotFoundError:
+      raise ADOPipelineDocException(
+        f"Error: The file {self.inputfile} was not found.")
 
-        except PermissionError:
-            raise ADOPipelineDocException(f"Error: Permission denied for file {self.inputfile}.")
+    except PermissionError:
+      raise ADOPipelineDocException(
+        f"Error: Permission denied for file {self.inputfile}.")
 
-        except yaml.YAMLError as exc:
-            raise ADOPipelineDocException(f"Error parsing YAML file: {exc}")
+    except yaml.YAMLError as exc:
+      raise ADOPipelineDocException(f"Error parsing YAML file: {exc}")
 
-    #-------------------------------------------------------------------------
-    def prettify(self, obj, key=None):
-        """
+  #---------------------------------------------------------------------------
+  def prettify(self, obj, key=None):
+    """
         Converts a given object to a pretty-printed string format.
 
         Args:
@@ -87,21 +95,28 @@ class ADOPipelineDoc:
 
         Returns:
             str: A pretty-printed string representation of the object.
+
+        # Add a list of what is raised on errors, AI!
         """
-        if not isinstance(obj, dict):
-            raise ADOPipelineDocException("The provided object is not a dictionary.")
+    if key is not None:
+      if not isinstance(obj, dict):
+        raise ADOPipelineDocException(
+          "The provided object is not a dictionary.")
 
-        if key is not None:
-            if key not in obj:
-                raise ADOPipelineDocException(f"Key '{key}' not found in the object.")
+        if key not in obj:
+          raise ADOPipelineDocException(
+            f"Key '{key}' not found in the object.")
 
-            return yaml.dump(obj[key], default_flow_style=False).strip().replace('\n', '<br/>')
+        pretty = yaml.dump(obj[key], default_flow_style=False)
 
-        return yaml.dump(obj, default_flow_style=False).strip().replace('\n', '<br/>')
+    else:
+      pretty = yaml.dump(obj, default_flow_style=False)
 
-    #-------------------------------------------------------------------------
-    def process_data(self):
-        """
+    return pretty.strip().replace('\n', '<br/>')
+
+  #---------------------------------------------------------------------------
+  def process_data(self):
+    """
         Processes the YAML parameters and converts them into a markdown table format.
 
         This method checks each parameter for required fields and optional fields like
@@ -112,95 +127,95 @@ class ADOPipelineDoc:
         Raises:
             ADOPipelineDocException: If a parameter is missing 'name' or 'type'.
         """
-        heading_order = [ 'required', 'name', 'type', 'displayName', 'values', 'default' ]
+    heading_order = [
+      'required', 'name', 'type', 'displayName', 'values', 'default'
+    ]
 
-        heading_separator = {
-          "required": ":-:",
-          "name": ":--",
-          "type": ":--",
-          "displayName": ":--",
-          "values": ":--",
-          "default": ":--"
-        }
+    heading_separator = {
+      "required": ":-:",
+      "name": ":--",
+      "type": ":--",
+      "displayName": ":--",
+      "values": ":--",
+      "default": ":--"
+    }
 
-        object_template = {
-          "required": "Yes",
-          "name": '',
-          "type": '',
-          "displayName": '',
-          "values": '',
-          "default": ''
-        }
+    object_template = {
+      "required": "Yes",
+      "name": '',
+      "type": '',
+      "displayName": '',
+      "values": '',
+      "default": ''
+    }
 
-        use_col = {
-            "displayName": False,
-            "values": False,
-            "default": False
-        }
+    use_col = {"displayName": False, "values": False, "default": False}
 
-        rows = []
+    rows = []
 
-        for param in self.parameters:
-            if not param.get('name') or not param.get('type'):
-                raise ADOPipelineDocException(f"Parameter missing 'name' or 'type': {param}")
+    for param in self.parameters:
+      if not param.get('name') or not param.get('type'):
+        raise ADOPipelineDocException(
+          f"Parameter missing 'name' or 'type': {param}")
 
-            if param.get('displayName', ''):
-              use_col["displayname"] = True
+      if param.get('displayName', ''):
+        use_col["displayname"] = True
 
-            if param.get('values', ''):
-                use_col["values"] = True
+      if param.get('values', ''):
+        use_col["values"] = True
 
-            row_object = object_template.copy()
-            row_object.update(param)
+      row_object = object_template.copy()
+      row_object.update(param)
 
-            if param.get('default', ''):
-                use_col["default"] = True
-                row_object["required"] = ''
+      if param.get('default', ''):
+        use_col["default"] = True
+        row_object["required"] = ''
 
-            if param.get('type') == 'object' and param.get('default'):
-                row_object['default'] = self.prettify(param['default'], key='default')
+      if param.get('type') == 'object' and param.get('default'):
+        row_object['default'] = self.prettify(param['default'], key='default')
 
-            if param.get('values'):
-                row_object['values'] = self.prettify(param['values'], key='values')
+      if param.get('values'):
+        row_object['values'] = self.prettify(param['values'], key='values')
 
-            rows.append(row_object)
+      rows.append(row_object)
 
-        for key, value in use_col.items():
-            if not value:
-                heading_order.remove(key)
-                for row in rows:
-                    row.pop(key, None)
-
-        table_rows = []
-
-        # Build the markdown header row
-        header_row = "| " + " | ".join(heading_order) + " |"
-        separator_row = "| " + " | ".join(heading_separator[key] for key in heading_order) + " |"
-
-        # Add header and separator to table_rows
-        table_rows.append(header_row)
-        table_rows.append(separator_row)
-
-        # Add parameter rows to table_rows
+    for key, value in use_col.items():
+      if not value:
+        heading_order.remove(key)
         for row in rows:
-            row_data = [str(row.get(key, '')) for key in heading_order]
-            row_text = "| " + " | ".join(row_data) + " |"
-            #print(row_text)
-            #sys.exit()
-            #table_rows.append("| " + " | ".join(row_data) + " |")
-            table_rows.append(row_text)
+          row.pop(key, None)
 
-        self.table_rows = table_rows
+    table_rows = []
 
-    def print_table_rows(self):
-        """
+    # Build the markdown header row
+    header_row = "| " + " | ".join(heading_order) + " |"
+    separator_row = "| " + " | ".join(heading_separator[key]
+                                      for key in heading_order) + " |"
+
+    # Add header and separator to table_rows
+    table_rows.append(header_row)
+    table_rows.append(separator_row)
+
+    # Add parameter rows to table_rows
+    for row in rows:
+      row_data = [str(row.get(key, '')) for key in heading_order]
+      row_text = "| " + " | ".join(row_data) + " |"
+      #print(row_text)
+      #sys.exit()
+      #table_rows.append("| " + " | ".join(row_data) + " |")
+      table_rows.append(row_text)
+
+    self.table_rows = table_rows
+
+  def print_table_rows(self):
+    """
         Prints the markdown table rows to stdout.
         """
-        for row in self.table_rows:
-            print(row)
+    for row in self.table_rows:
+      print(row)
 
 
 if __name__ == "__main__":
-    ADOPipelineDoc('azure-pipelines.yml').print_table_rows()
-    #yaml_processor = ADOPipelineDoc('azure-pipelines.yml')
-    #yaml_processor.print_table_rows()
+  ADOPipelineDoc('azure-pipelines.yml').print_table_rows()
+  #yaml_processor = ADOPipelineDoc('azure-pipelines.yml')
+  #yaml_processor.print_table_rows()
