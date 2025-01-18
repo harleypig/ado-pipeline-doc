@@ -74,8 +74,17 @@ class ADOPipelineDoc:
         required_rows = []
         optional_rows = []
 
-# Raise an ADODoc exception if name or type is not set and print it out as it appears in the yaml,  AI!
         for param in self.parameters:
+            name = param.get('name')
+            param_type = param.get('type')
+            default = param.get('default', '')
+            description = param.get('description', '')
+
+            if not name or not param_type:
+                raise ADOPipelineDocException(f"Parameter missing 'name' or 'type': {param}")
+
+            row = f"| {name} | {param_type} | {default} | {description} |\n"
+
             if default:
                 optional_rows.append(row)
             else:
