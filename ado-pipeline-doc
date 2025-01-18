@@ -78,12 +78,13 @@ class ADOPipelineDoc:
           "default": ''
         }
 
+        title_order = [ 'name', 'type', 'displayName', 'values', 'default' ]
+
         use_col = {
             "displayName": False,
-            "default": False,
-            "values": False
+            "values": False,
+            "default": False
         }
-        title_order = [ 'name', 'type', 'displayName', 'values', 'default' ]
 
         for param in self.parameters:
             if not param.name or not param.type:
@@ -103,6 +104,8 @@ class ADOPipelineDoc:
                 optional_rows.append(row_object)
             else:
                 required_rows.append(row_object)
+
+# Outside the for loop above, for any key in use_col that is False, remove the corresponding element from title_order, optional_rows, and required_rows, AI!
 
 #markdown_table = "| Name | Type | Default | Description |\n"
 #markdown_table += "|------|------|---------|-------------|\n"
