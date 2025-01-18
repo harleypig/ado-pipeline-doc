@@ -67,10 +67,19 @@ class ADOPipelineDoc:
         """
         Converts the parameters into a markdown table and then to HTML using python-markdown.
         """
-        required_rows = []
-        optional_rows = []
+        heading_order = [ 'required', 'name', 'type', 'displayName', 'values', 'default' ]
+
+        heading_separator = {
+          "required": ":-:",
+          "name": "--:",
+          "type": "--:",
+          "displayName": ":--",
+          "values": ":--",
+          "default": ":--"
+        }
 
         object_template = {
+          "required" = "✅",
           "name": '',
           "type": '',
           "displayName": '',
@@ -78,13 +87,13 @@ class ADOPipelineDoc:
           "default": ''
         }
 
-        heading_order = [ 'name', 'type', 'displayName', 'values', 'default' ]
-
         use_col = {
             "displayName": False,
             "values": False,
             "default": False
         }
+
+        rows = []
 
         for param in self.parameters:
             if not param.name or not param.type:
@@ -101,17 +110,17 @@ class ADOPipelineDoc:
 
             if param.get('default', ''):
                 use_col["default"] = True
-                optional_rows.append(row_object)
-            else:
-                required_rows.append(row_object)
+                row_object["required"] = ''
+
+            rows.append(row_object)
 
         for key, value in use_col.items():
             if not value:
                 heading_order.remove(key)
-                for row in optional_rows:
+                for row in rows:
                     row.pop(key, None)
-                for row in required_rows:
-                    row.pop(key, None)
+
+# Build the markdown header row based on what is in the header_order array and add it as the first row in table_rows, AI!
 
 #markdown_table = "| Name | Type | Default | Description |\n"
 #markdown_table += "|------|------|---------|-------------|\n"
