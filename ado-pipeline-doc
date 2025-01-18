@@ -90,7 +90,9 @@ class ADOPipelineDoc:
         """
         if not isinstance(obj, dict):
             raise ADOPipelineDocException("The provided object is not a dictionary.")
+
         if key is not None:
+          # Raise an error separately if obj is not a dict, AI!
             if not isinstance(obj, dict) or key not in obj:
                 raise ADOPipelineDocException(f"Key '{key}' not found in the object.")
 
