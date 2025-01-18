@@ -112,9 +112,8 @@ class ADOPipelineDoc:
                 use_col["default"] = True
                 row_object["required"] = ''
 
-# pretty  print should use '<br/>' instead of newlines, AI!
             if param.get('type') == 'object' and param.get('default'):
-                row_object['default'] = yaml.dump(param['default'], default_flow_style=False).strip()
+                row_object['default'] = yaml.dump(param['default'], default_flow_style=False).strip().replace('\n', '<br/>')
 
 # pretty  print should use '<br/>' instead of newlines
             if param.get('values'):
