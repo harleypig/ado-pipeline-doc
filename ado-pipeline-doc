@@ -72,6 +72,7 @@ class ADOPipelineDoc:
         except yaml.YAMLError as exc:
             raise ADOPipelineDocException(f"Error parsing YAML file: {exc}")
 
+# Document the process_data method, AI!
     def process_data(self):
         """
         Converts the parameters into a markdown table and then to HTML using python-markdown.
