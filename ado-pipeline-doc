@@ -96,7 +96,7 @@ class ADOPipelineDoc:
         rows = []
 
         for param in self.parameters:
-            if not param.name or not param.type:
+            if not param.get('name') or not param.get('type'):
                 raise ADOPipelineDocException(f"Parameter missing 'name' or 'type': {param}")
 
             if param.get('displayName', ''):
