@@ -78,8 +78,7 @@ class ADOPipelineDoc:
           "default": ''
         }
 
-# Rename title_order to heading_order, AI!
-        title_order = [ 'name', 'type', 'displayName', 'values', 'default' ]
+        heading_order = [ 'name', 'type', 'displayName', 'values', 'default' ]
 
         use_col = {
             "displayName": False,
@@ -108,7 +107,7 @@ class ADOPipelineDoc:
 
         for key, value in use_col.items():
             if not value:
-                title_order.remove(key)
+                heading_order.remove(key)
                 for row in optional_rows:
                     row.pop(key, None)
                 for row in required_rows:
