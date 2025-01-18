@@ -79,7 +79,7 @@ class ADOPipelineDoc:
         }
 
         object_template = {
-          "required" = "✅",
+          "required": "✅",
           "name": '',
           "type": '',
           "displayName": '',
