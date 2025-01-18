@@ -1,8 +1,19 @@
 #!/usr/bin/env python
 
+# Parameter and Types:
+#  https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema/parameters-parameter
+
+# Parameter Keys:
+# Required: name, type
+# Optional: displayName, default, values
+
+# Data Types:
+# string, number, boolean, object
+
+# Note: There is no native way to enforce an object's structure.
+
 import yaml
 import sys
-import markdown
 
 class ADOPipelineDocException(Exception):
     pass
@@ -60,6 +71,7 @@ class ADOPipelineDoc:
         markdown_table = "| Name | Type | Default | Description |\n"
         markdown_table += "|------|------|---------|-------------|\n"
 
+# Put each line in an array of either @required_rows or @optional_rows (depending on if default is set), AI!
         for param in self.parameters:
             name = param.get('name', '')
             param_type = param.get('type', '')
