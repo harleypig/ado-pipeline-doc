@@ -2,6 +2,7 @@
 
 import yaml
 import sys
+import markdown
 
 class ADOPipelineDocException(Exception):
     pass
@@ -51,8 +52,10 @@ class ADOPipelineDoc:
         except yaml.YAMLError as exc:
             raise ADOPipelineDocException(f"Error parsing YAML file: {exc}")
 
-# Use python-markdown to create the table, AI!
     def process_data(self):
+        """
+        Converts the parameters into a markdown table and then to HTML using python-markdown.
+        """
         # Prepare markdown table
         markdown_table = "| Name | Type | Default | Description |\n"
         markdown_table += "|------|------|---------|-------------|\n"
@@ -65,7 +68,9 @@ class ADOPipelineDoc:
 
             markdown_table += f"| {name} | {param_type} | {default} | {description} |\n"
 
-        return markdown_table
+        # Convert markdown to HTML
+        html_output = markdown.markdown(markdown_table)
+        return html_output
 
 # Example usage
 yaml_processor = ADOPipelineDoc('azure-pipelines.yml')  # Replace with your YAML file path
