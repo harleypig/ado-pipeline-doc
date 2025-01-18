@@ -96,7 +96,9 @@ class ADOPipelineDoc:
         Returns:
             str: A pretty-printed string representation of the object.
 
-        # Add a list of what is raised on errors, AI!
+        Raises:
+            ADOPipelineDocException: If the object is not a dictionary.
+            ADOPipelineDocException: If the key is not found in the object.
         """
     if key is not None:
       if not isinstance(obj, dict):

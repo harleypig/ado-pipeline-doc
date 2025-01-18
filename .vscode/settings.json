@@ -47,10 +47,15 @@
   "search.useGlobalIgnoreFiles": true,
 
   // Python specific stuff
-  // Add settings that match any of the above settings (they seem to be different globally), AI!
   "python": {
     "formatting.provider": "yapf",
     "linting.enabled": true,
+    "formatting.formatOnSave": true,
+    "formatting.formatOnType": true,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "editor.autoIndent": "full",
     "linting.pylintEnabled": true,
     "linting.pylintArgs": ["--disable=C0111,C0301,W0611"],
     "analysis.typeCheckingMode": "basic"
