@@ -1,0 +1,58 @@
+{
+  // Note: Some vim `formatoptions` flags are not directly supported in
+  // VSCode.
+  // 't', 'c', 'r', 'o' are partially supported with formatOnType and
+  //  wordWrap settings.
+  // 'q', '1' are not directly supported.
+
+  // Terminal
+  "terminal.integrated.cwd": "${workspaceFolder}",
+
+  // Editor Behavior
+  "editor.cursorBlinking": "solid",
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.matchBrackets": "always",
+  "editor.rulers": [78],
+  "editor.scrollBeyondLastLine": true,
+  "editor.suggestSelection": "first",
+  "editor.wordWrap": "on",
+  //"editor.wordWrapColumn": 1,
+
+  // Display
+  "editor.cursorSurroundingLines": 999999,
+  "editor.renderControlCharacters": true,
+  "editor.renderWhitespace": "all",
+
+  // Gutter
+  "editor.codeLens": true,
+  "editor.lineNumbers": "on",
+  "editor.showFoldingControls": "always",
+
+  // File Management
+  "files.autoSave": "afterDelay",
+
+  // Encoding
+  "files.eol": "\n",
+  "files.encoding": "utf8",
+
+  // Indentation
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.autoIndent": "full",
+
+  // Search
+  "search.useIgnoreFiles": true,
+  "search.useGlobalIgnoreFiles": true,
+
+  // Python specific stuff
+  // Add settings that match any of the above settings (they seem to be different globally), AI!
+  "python": {
+    "formatting.provider": "yapf",
+    "linting.enabled": true,
+    "linting.pylintEnabled": true,
+    "linting.pylintArgs": ["--disable=C0111,C0301,W0611"],
+    "analysis.typeCheckingMode": "basic"
+  }
+}

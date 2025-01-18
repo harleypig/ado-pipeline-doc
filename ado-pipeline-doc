@@ -135,14 +135,8 @@ class ADOPipelineDoc:
             row_data = [row.get(key, '') for key in heading_order]
             table_rows.append("| " + " | ".join(row_data) + " |")
 
-#markdown_table = "| Name | Type | Default | Description |\n"
-#markdown_table += "|------|------|---------|-------------|\n"
-#name = param.get('name', '')
-#param_type = param.get('type', '')
-#default = param.get('default', '')
-#description = param.get('description', '')
-#row = f"| {name} | {param_type} | {default} | {description} |\n"
-#markdown_table += ''.join(required_rows) + ''.join(optional_rows)
+        self.table_rows = table_rows
+
 
 # Example usage
 yaml_processor = ADOPipelineDoc('azure-pipelines.yml')  # Replace with your YAML file path
