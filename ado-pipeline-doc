@@ -137,7 +137,12 @@ class ADOPipelineDoc:
 
         self.table_rows = table_rows
 
-# Add a function to this class the dumps out self.table_rows to stdout, AI!
+    def dump_table_rows(self):
+        """
+        Prints the markdown table rows to stdout.
+        """
+        for row in self.table_rows:
+            print(row)
 
 
 # Example usage
