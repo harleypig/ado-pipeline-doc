@@ -112,6 +112,8 @@ class ADOPipelineDoc:
                 use_col["default"] = True
                 row_object["required"] = ''
 
+            # If param type is object and default is set, the value needs to be stringified and pretty printed, AI!
+
             rows.append(row_object)
 
         for key, value in use_col.items():
