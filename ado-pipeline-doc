@@ -72,10 +72,17 @@ class ADOPipelineDoc:
         except yaml.YAMLError as exc:
             raise ADOPipelineDocException(f"Error parsing YAML file: {exc}")
 
-# Document the process_data method, AI!
     def process_data(self):
         """
-        Converts the parameters into a markdown table and then to HTML using python-markdown.
+        Processes the YAML parameters and converts them into a markdown table format.
+
+        This method checks each parameter for required fields and optional fields like
+        displayName, values, and default. It constructs a markdown table with headers
+        and rows representing each parameter's details. The table is stored in the
+        table_rows attribute for further use.
+
+        Raises:
+            ADOPipelineDocException: If a parameter is missing 'name' or 'type'.
         """
         heading_order = [ 'required', 'name', 'type', 'displayName', 'values', 'default' ]
 
