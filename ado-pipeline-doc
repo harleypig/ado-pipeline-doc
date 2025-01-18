@@ -78,6 +78,7 @@ class ADOPipelineDoc:
           "default": ''
         }
 
+# Rename title_order to heading_order, AI!
         title_order = [ 'name', 'type', 'displayName', 'values', 'default' ]
 
         use_col = {
