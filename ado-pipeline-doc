@@ -145,5 +145,6 @@ class ADOPipelineDoc:
             print(row)
 
 
-# Change this so that code runs when this file is run, AI!
-yaml_processor = ADOPipelineDoc('azure-pipelines.yml')  # Replace with your YAML file path
+if __name__ == "__main__":
+    yaml_processor = ADOPipelineDoc('azure-pipelines.yml')  # Replace with your YAML file path
+    yaml_processor.print_table_rows()
