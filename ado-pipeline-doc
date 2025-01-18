@@ -19,18 +19,19 @@ class ADOPipelineDocException(Exception):
     pass
 
 class ADOPipelineDoc:
-  # Add an outputfile option that defaults to None, AI!
-    def __init__(self, inputfile=None):
+    def __init__(self, inputfile=None, outputfile=None):
         """
-        Initializes the ADOPipelineDoc with a given YAML input file.
+        Initializes the ADOPipelineDoc with a given YAML input file and an optional output file.
 
         Args:
             inputfile (str): The path to the YAML file containing pipeline parameters.
+            outputfile (str, optional): The path to the output file where the processed data will be saved.
 
         Raises:
             ADOPipelineDocException: If no input file is provided.
         """
         self.inputfile = inputfile
+        self.outputfile = outputfile
         self.data = None
 
         if self.inputfile is None:
