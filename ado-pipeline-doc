@@ -19,8 +19,16 @@ class ADOPipelineDocException(Exception):
     pass
 
 class ADOPipelineDoc:
-  # Document the __init__ method, AI!
     def __init__(self, filename=None):
+        """
+        Initializes the ADOPipelineDoc with a given YAML filename.
+
+        Args:
+            filename (str): The path to the YAML file containing pipeline parameters.
+
+        Raises:
+            ADOPipelineDocException: If no filename is provided.
+        """
         self.filename = filename
         self.data = None
 
