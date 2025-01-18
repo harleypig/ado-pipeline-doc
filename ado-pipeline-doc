@@ -77,14 +77,13 @@ class ADOPipelineDoc:
             raise ADOPipelineDocException(f"Error parsing YAML file: {exc}")
 
     #-------------------------------------------------------------------------
-    # Modify this function so that key is optional, AI!
-    def prettify(self, key, obj):
+    def prettify(self, obj, key=None):
         """
         Converts a given object to a pretty-printed string format.
 
         Args:
-            key (str): The key associated with the object.
             obj (any): The object to be converted to a string.
+            key (str, optional): The key associated with the object.
 
         Returns:
             str: A pretty-printed string representation of the object.
