@@ -19,6 +19,7 @@ class ADOPipelineDocException(Exception):
     pass
 
 class ADOPipelineDoc:
+    #-------------------------------------------------------------------------
     def __init__(self, inputfile=None, outputfile=None):
         """
         Initializes the ADOPipelineDoc with a given YAML input file and an optional output file.
@@ -40,6 +41,7 @@ class ADOPipelineDoc:
         self.load_file()
         self.process_data()
 
+    #-------------------------------------------------------------------------
     def load_file(self):
         """
         Loads the YAML file specified by the filename attribute and stores its parsed contents in the data attribute.
@@ -74,6 +76,22 @@ class ADOPipelineDoc:
         except yaml.YAMLError as exc:
             raise ADOPipelineDocException(f"Error parsing YAML file: {exc}")
 
+    #-------------------------------------------------------------------------
+    # Modify this function so that key is optional, AI!
+    def prettify(self, key, obj):
+        """
+        Converts a given object to a pretty-printed string format.
+
+        Args:
+            key (str): The key associated with the object.
+            obj (any): The object to be converted to a string.
+
+        Returns:
+            str: A pretty-printed string representation of the object.
+        """
+        return yaml.dump(obj, default_flow_style=False).strip().replace('\n', '<br/>')
+
+    #-------------------------------------------------------------------------
     def process_data(self):
         """
         Processes the YAML parameters and converts them into a markdown table format.
@@ -130,19 +148,6 @@ class ADOPipelineDoc:
             if param.get('default', ''):
                 use_col["default"] = True
                 row_object["required"] = ''
-
-    def prettify(self, key, obj):
-        """
-        Converts a given object to a pretty-printed string format.
-
-        Args:
-            key (str): The key associated with the object.
-            obj (any): The object to be converted to a string.
-
-        Returns:
-            str: A pretty-printed string representation of the object.
-        """
-        return yaml.dump(obj, default_flow_style=False).strip().replace('\n', '<br/>')
 
             if param.get('type') == 'object' and param.get('default'):
                 row_object['default'] = self.prettify('default', param['default'])
