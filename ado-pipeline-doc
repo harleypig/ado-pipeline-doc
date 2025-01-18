@@ -137,7 +137,7 @@ class ADOPipelineDoc:
 
         self.table_rows = table_rows
 
-    def dump_table_rows(self):
+    def print_table_rows(self):
         """
         Prints the markdown table rows to stdout.
         """
@@ -145,7 +145,5 @@ class ADOPipelineDoc:
             print(row)
 
 
-# Example usage
+# Change this so that code runs when this file is run, AI!
 yaml_processor = ADOPipelineDoc('azure-pipelines.yml')  # Replace with your YAML file path
-markdown_output = yaml_processor.process_data()
-print(markdown_output)
