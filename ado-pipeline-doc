@@ -22,21 +22,20 @@ class ADOPipelineDocException(Exception):
 
 class ADOPipelineDoc:
   #---------------------------------------------------------------------------
-  # Rename outputfile to mdFile, AI!
-  def __init__(self, yamlFile=None, outputfile=None):
+  def __init__(self, yamlFile=None, mdFile=None):
     """
     Initializes the ADOPipelineDoc with a given YAML input file and an
     optional output file.
 
     Args:
         yamlFile (str): The path to the YAML file containing pipeline parameters.
-        outputfile (str, optional): The path to the output file where the processed data will be saved.
+        mdFile (str, optional): The path to the output file where the processed data will be saved.
 
     Raises:
         ADOPipelineDocException: If no input file is provided.
     """
     self.yamlFile = yamlFile
-    self.outputfile = outputfile
+    self.mdFile = mdFile
     self.data = None
     self.md_start = 'ADOPipelineDoc Start'
     self.md_end = 'ADOPipelineDoc End'
