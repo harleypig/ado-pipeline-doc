@@ -29,19 +29,19 @@ class ADOPipelineDoc:
     optional output file.
 
     Args:
-        inputfile (str): The path to the YAML file containing pipeline parameters.
+        yamlFile (str): The path to the YAML file containing pipeline parameters.
         outputfile (str, optional): The path to the output file where the processed data will be saved.
 
     Raises:
         ADOPipelineDocException: If no input file is provided.
     """
-    self.inputfile = inputfile
+    self.yamlFile = yamlFile
     self.outputfile = outputfile
     self.data = None
     self.md_start = 'ADOPipelineDoc Start'
     self.md_end = 'ADOPipelineDoc End'
 
-    if self.inputfile is None:
+    if self.yamlFile is None:
       raise ADOPipelineDocException(
         "Input file must be provided to ADOPipelineDoc.")
 
@@ -61,7 +61,7 @@ class ADOPipelineDoc:
         - ADOPipelineDocException: If there is an error in parsing the YAML content.
     """
     try:
-      with open(self.inputfile, 'r') as file:
+      with open(self.yamlFile, 'r') as file:
         data = yaml.safe_load(file)
 
         if data is None:
@@ -78,11 +78,11 @@ class ADOPipelineDoc:
 
     except FileNotFoundError:
       raise ADOPipelineDocException(
-        f"Error: The file {self.inputfile} was not found.")
+        f"Error: The file {self.yamlFile} was not found.")
 
     except PermissionError:
       raise ADOPipelineDocException(
-        f"Error: Permission denied for file {self.inputfile}.")
+        f"Error: Permission denied for file {self.yamlFile}.")
 
     except yaml.YAMLError as exc:
       raise ADOPipelineDocException(f"Error parsing YAML file: {exc}")
