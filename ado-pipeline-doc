@@ -22,6 +22,7 @@ class ADOPipelineDocException(Exception):
 
 class ADOPipelineDoc:
   #---------------------------------------------------------------------------
+  # Rename inputfile to yamlFile, AI!
   def __init__(self, inputfile=None, outputfile=None):
     """
     Initializes the ADOPipelineDoc with a given YAML input file and an
@@ -147,7 +148,6 @@ class ADOPipelineDoc:
 
     use_col = {"displayName": False, "values": False, "default": False}
 
-    # <!-- ADOPipelineDoc Start -->
     rows = []
 
     for param in self.parameters:
@@ -182,7 +182,7 @@ class ADOPipelineDoc:
         for row in rows:
           row.pop(key, None)
 
-    table_rows = []
+    table_rows = [f"<!-- {self.md_start} -->"]
 
     # Build the markdown header row
     header_row = "| " + " | ".join(heading_order) + " |"
@@ -199,18 +199,16 @@ class ADOPipelineDoc:
       row_text = "| " + " | ".join(row_data) + " |"
       table_rows.append(row_text)
 
-    # <!-- ADOPipelineDoc End -->
+    table_rows.append(f"<!-- {self.md_end} -->")
     self.table_rows = table_rows
 
   def print_table_rows(self):
     """
-        Prints the markdown table rows to stdout.
-        """
+    Prints the markdown table rows to stdout.
+    """
     for row in self.table_rows:
       print(row)
 
 
 if __name__ == "__main__":
   ADOPipelineDoc('azure-pipelines.yml').print_table_rows()
-  #yaml_processor = ADOPipelineDoc('azure-pipelines.yml')
-  #yaml_processor.print_table_rows()
