@@ -22,8 +22,7 @@ class ADOPipelineDocException(Exception):
 
 class ADOPipelineDoc:
   #---------------------------------------------------------------------------
-  # Rename inputfile to yamlFile, AI!
-  def __init__(self, inputfile=None, outputfile=None):
+  def __init__(self, yamlFile=None, outputfile=None):
     """
     Initializes the ADOPipelineDoc with a given YAML input file and an
     optional output file.
