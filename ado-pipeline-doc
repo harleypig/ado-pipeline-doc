@@ -37,6 +37,8 @@ class ADOPipelineDoc:
     self.inputfile = inputfile
     self.outputfile = outputfile
     self.data = None
+    self.md_start = 'ADOPipelineDoc Start'
+    self.md_end = 'ADOPipelineDoc End'
 
     if self.inputfile is None:
       raise ADOPipelineDocException(
@@ -145,6 +147,7 @@ class ADOPipelineDoc:
 
     use_col = {"displayName": False, "values": False, "default": False}
 
+# Make the first row a markdown comment with self.md_start, AI!
     rows = []
 
     for param in self.parameters:
