@@ -47,7 +47,7 @@
   "search.useGlobalIgnoreFiles": true,
 
   // Python specific stuff
-  "python": {
+  "[python]": {
     "formatting.provider": "yapf",
     "linting.enabled": true,
     "formatting.formatOnSave": true,

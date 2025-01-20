@@ -10,7 +10,7 @@ parameters:
   - name: numberParam
     type: number
     displayName: Number Parameter
-    default: 10
+    default: 5
     values:
       - 5
       - 10

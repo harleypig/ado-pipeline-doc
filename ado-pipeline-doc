@@ -101,7 +101,7 @@ class ADOPipelineDoc:
         ADOPipelineDocException: If the key is not found in the object.
     """
     if key is not None:
-      pretty = yaml.dump(obj[key], default_flow_style=True)
+      pretty = yaml.dump(obj[key], default_flow_style=False)
 
     else:
       pretty = yaml.dump(obj, default_flow_style=False)
@@ -153,7 +153,7 @@ class ADOPipelineDoc:
           f"Parameter missing 'name' or 'type': {param}")
 
       if param.get('displayName', ''):
-        use_col["displayname"] = True
+        use_col["displayName"] = True
 
       if param.get('values', ''):
         use_col["values"] = True
