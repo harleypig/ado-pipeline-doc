@@ -147,7 +147,7 @@ class ADOPipelineDoc:
 
     use_col = {"displayName": False, "values": False, "default": False}
 
-# Make the first row a markdown comment with self.md_start, AI!
+    # <!-- ADOPipelineDoc Start -->
     rows = []
 
     for param in self.parameters:
@@ -197,11 +197,9 @@ class ADOPipelineDoc:
     for row in rows:
       row_data = [str(row.get(key, '')) for key in heading_order]
       row_text = "| " + " | ".join(row_data) + " |"
-      #print(row_text)
-      #sys.exit()
-      #table_rows.append("| " + " | ".join(row_data) + " |")
       table_rows.append(row_text)
 
+    # <!-- ADOPipelineDoc End -->
     self.table_rows = table_rows
 
   def print_table_rows(self):
