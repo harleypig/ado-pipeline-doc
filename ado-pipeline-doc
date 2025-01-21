@@ -315,12 +315,18 @@ class ADOPipelineDoc:
         file.write("\n".join(self.table_rows))
 
 
-if __name__ == "__main__":
-  # Put the argument handler in a function outside of the class, AI!
+def parse_arguments():
+  """
+  Parses command line arguments for the script.
+
+  Returns:
+    Namespace: The parsed arguments as a namespace object.
+  """
   parser = argparse.ArgumentParser(description='Process YAML and generate markdown documentation.')
   parser.add_argument('yamlFile', type=str, help='The path to the YAML file containing pipeline parameters.')
   parser.add_argument('--mdFile', type=str, help='The path to the output markdown file. If not provided, output will be printed to the console.')
+  return parser.parse_args()
 
-  args = parser.parse_args()
-
+if __name__ == "__main__":
+  args = parse_arguments()
   ADOPipelineDoc(args.yamlFile, args.mdFile)
