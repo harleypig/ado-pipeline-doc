@@ -47,7 +47,7 @@ class ADOPipelineDoc:
         "Input file must be provided to ADOPipelineDoc.")
 
     self.parseYAML()
-    self.process_data()
+    self.processData()
 
     if mdFile is None:
       print("\n".join(self.table_rows))
@@ -143,8 +143,7 @@ class ADOPipelineDoc:
       raise ADOPipelineDocException(f"Error parsing YAML file: {e}")
 
   #---------------------------------------------------------------------------
-  # Rename process_data to processData, AI!
-  def process_data(self):
+  def processData(self):
     """
     Processes the YAML parameters and converts them into a markdown table format.
 
