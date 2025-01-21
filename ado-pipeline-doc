@@ -28,8 +28,8 @@ class ADOPipelineDoc:
     optional output file.
 
     Args:
-        yamlFile (str): The path to the YAML file containing pipeline parameters.
-        mdFile (str, optional): The path to the output file where the processed data will be saved.
+      yamlFile (str): The path to the YAML file containing pipeline parameters.
+      mdFile (str, optional): The path to the output file where the processed data will be saved.
 
     Raises:
         ADOPipelineDocException: If no input file is provided.
@@ -46,6 +46,7 @@ class ADOPipelineDoc:
 
     self.load_file()
     self.process_data()
+    
 
   #---------------------------------------------------------------------------
   def load_file(self):
@@ -92,15 +93,15 @@ class ADOPipelineDoc:
     Converts a given object to a pretty-printed string format.
 
     Args:
-        obj (any): The object to be converted to a string.
-        key (str, optional): The key associated with the object.
+      obj (any): The object to be converted to a string.
+      key (str, optional): The key associated with the object.
 
     Returns:
-        str: A pretty-printed string representation of the object.
+      str: A pretty-printed string representation of the object.
 
     Raises:
-        ADOPipelineDocException: If a key is passed and the object is not a dictionary.
-        ADOPipelineDocException: If the key is not found in the object.
+      ADOPipelineDocException: If a key is passed and the object is not a dictionary.
+      ADOPipelineDocException: If the key is not found in the object.
     """
     if key is not None:
       pretty = yaml.dump(obj[key], default_flow_style=False)
@@ -121,7 +122,7 @@ class ADOPipelineDoc:
     table_rows attribute for further use.
 
     Raises:
-        ADOPipelineDocException: If a parameter is missing 'name' or 'type'.
+      ADOPipelineDocException: If a parameter is missing 'name' or 'type'.
     """
     heading_order = [
       'required', 'name', 'type', 'displayName', 'values', 'default'
@@ -202,6 +203,15 @@ class ADOPipelineDoc:
     self.table_rows = table_rows
 
   #---------------------------------------------------------------------------
+  # Rename this function to print_to_stdout, AI!
+  def print_table_rows(self):
+    """
+    Prints the markdown table rows to stdout.
+    """
+    for row in self.table_rows:
+      print(row)
+
+  #---------------------------------------------------------------------------
   def manage_md_file(self):
     """
     Manages the markdown file based on the presence of start and end comments.
@@ -211,46 +221,36 @@ class ADOPipelineDoc:
     Replaces existing text between comments with the data.
     
     Raises:
-        ADOPipelineDocException: If the file exists and both comments are missing.
+      ADOPipelineDocException: If the file exists and both comments are missing.
     """
     if self.mdFile is None:
-        return
+      return
 
     try:
-        with open(self.mdFile, 'r+') as file:
-            content = file.read()
+      with open(self.mdFile, 'r+') as file:
+        content = file.read()
 
-            start_index = content.find(f"<!-- {self.mdStart} -->")
-            end_index = content.find(f"<!-- {self.mdEnd} -->")
+        start_index = content.find(f"<!-- {self.mdStart} -->")
+        end_index = content.find(f"<!-- {self.mdEnd} -->")
 
-            if start_index == -1 and end_index == -1:
-                raise ADOPipelineDocException(
-                    "Both start and end comments are missing in the file."
-                )
+        if start_index == -1 and end_index == -1:
+          raise ADOPipelineDocException(
+            "Both start and end comments are missing in the file.")
 
-            if start_index == -1 or end_index == -1:
-                file.seek(0, 2)  # Move to the end of the file
-                file.write("\n" + "\n".join(self.table_rows))
-            else:
-                new_content = (
-                    content[:start_index] +
-                    "\n".join(self.table_rows) +
-                    content[end_index + len(f"<!-- {self.mdEnd} -->"):]
-                )
-                file.seek(0)
-                file.write(new_content)
-                file.truncate()
+        if start_index == -1 or end_index == -1:
+          file.seek(0, 2)  # Move to the end of the file
+          file.write("\n" + "\n".join(self.table_rows))
+        else:
+          new_content = (content[:start_index] + "\n".join(self.table_rows) +
+                         content[end_index + len(f"<!-- {self.mdEnd} -->"):])
+          file.seek(0)
+          file.write(new_content)
+          file.truncate()
 
     except FileNotFoundError:
-        with open(self.mdFile, 'w') as file:
-            file.write("\n".join(self.table_rows))
+      with open(self.mdFile, 'w') as file:
+        file.write("\n".join(self.table_rows))
 
-  def print_table_rows(self):
-    """
-    Prints the markdown table rows to stdout.
-    """
-    for row in self.table_rows:
-      print(row)
 
 
 if __name__ == "__main__":
