@@ -334,9 +334,8 @@ def parse_arguments():
     type=str,
     help='The path to the YAML file containing pipeline parameters.')
 
-# use --mdfile and allow for --markdown-file, AI!
   parser.add_argument(
-    '--mdFile',
+    '--mdfile', '--markdown-file',
     type=str,
     help=
     'The path to the output markdown file. If not provided, output will be printed to the console.'
