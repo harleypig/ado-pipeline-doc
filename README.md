@@ -16,10 +16,11 @@ The script includes custom error handling to manage various exceptions that may 
 - If the YAML file is empty or contains null data.
 - If the YAML file has no parameters.
 - If there is an error in parsing the YAML content.
-- If a parameter is missing required fields such as 'name' or 'type'.
-- If the output markdown file exists but lacks the necessary start or end comments.
+- If a parameter is missing required fields 'name' or 'type'.
 
-If the output markdown file exists and contains only one of the start or end comments, an error will be raised. This ensures that the table is correctly inserted between the specified comments. If neither comment is present, the table is appended to the end of the file.
+If the output markdown file exists and contains only one of the start or end
+comments, an error will be raised. If neither comment is present, the table is
+appended to the end of the file.
 
 ## Requirements
 
