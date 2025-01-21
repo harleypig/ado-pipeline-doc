@@ -248,7 +248,7 @@ class ADOPipelineDoc:
           row.pop(key, None)
 
     table_rows = []
-    if self.mdFile is not None: table_rows.append(f"{self.mdStartStr}")
+    if self.mdFile is not None: table_rows.append(f"{self.mdStartStr()}")
 
     # Build the markdown header row
     header_row = "| " + " | ".join(heading_order) + " |"
@@ -265,7 +265,7 @@ class ADOPipelineDoc:
       row_text = "| " + " | ".join(row_data) + " |"
       table_rows.append(row_text)
 
-    if self.mdFile is not None: table_rows.append(f"{self.mdEndStr}")
+    if self.mdFile is not None: table_rows.append(f"{self.mdEndStr()}")
 
     self.table_rows = table_rows
 
@@ -292,11 +292,13 @@ class ADOPipelineDoc:
       start_index = content.find(self.mdStartStr())
       end_index = content.find(self.mdEndStr())
 
-      if start_index == -1 and end_index >= -1:
-        raise ADOPipelineDocException(f"No start comment found in {self.mdFile}.")
+      if start_index == -1 and end_index > -1:
+        raise ADOPipelineDocException(
+          f"No start comment found in {self.mdFile}.")
 
-      if start_index >= -1 and end_index == -1:
-        raise ADOPipelineDocException(f"No end comment found in {self.mdFile}.")
+      if start_index > -1 and end_index == -1:
+        raise ADOPipelineDocException(
+          f"No end comment found in {self.mdFile}.")
 
       # Create a temporary file
       with tempfile.NamedTemporaryFile('w', delete=False) as temp_file:
@@ -307,8 +309,9 @@ class ADOPipelineDoc:
           temp_file.write(content + "\n" + "\n".join(self.table_rows))
 
         else:
+          # Add the length of the end comment string to the end_index, AI!
           new_content = (content[:start_index] + "\n".join(self.table_rows) +
-                         content[end_index + len(f"{self.mdEndStr}"):])
+                         content[end_index:])
           temp_file.write(new_content)
 
       os.replace(temp_file_name, self.mdFile)
@@ -327,15 +330,19 @@ def parse_arguments():
     Namespace: The parsed arguments as a namespace object.
   """
   parser = argparse.ArgumentParser(
-    description='Process YAML and generate markdown documentation.')
+    description=
+    'Process Azure DevOps pipeline YAML file and generate markdown documentation.'
+  )
 
   parser.add_argument(
     'yamlFile',
+    metavar='YAMLFILE',
     type=str,
     help='The path to the YAML file containing pipeline parameters.')
 
   parser.add_argument(
-    '--mdfile', '--markdown-file',
+    '--mdfile',
+    '--markdown-file',
     type=str,
     metavar='MARKDOWNFILE',
     help=
@@ -350,7 +357,7 @@ if __name__ == "__main__":
   args = parse_arguments()
 
   try:
-    ADOPipelineDoc(args.yamlFile, args.mdFile)
+    ADOPipelineDoc(args.yamlFile, args.mdfile)
 
   except ADOPipelineDocException as e:
     print(f"Error: {e}")
