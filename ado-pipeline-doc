@@ -35,8 +35,8 @@ class ADOPipelineDoc:
         ADOPipelineDocException: If no input file is provided.
     """
     self.data = None
-    self.mdFile = mdFile
     self.mdEnd = 'ADOPipelineDoc End'
+    self.mdFile = mdFile
     self.mdStart = 'ADOPipelineDoc Start'
     self.yamlFile = yamlFile
 
@@ -54,10 +54,10 @@ class ADOPipelineDoc:
     parsed contents in the data attribute.
 
     Raises:
-        - ADOPipelineDocException: If the file cannot be accessed.
-        - ADOPipelineDocException: If the YAML file is empty or contains null data.
-        - ADOPipelineDocException: If the YAML file has no parameters.
-        - ADOPipelineDocException: If there is an error in parsing the YAML content.
+      - ADOPipelineDocException: If the file cannot be accessed.
+      - ADOPipelineDocException: If the YAML file is empty or contains null data.
+      - ADOPipelineDocException: If the YAML file has no parameters.
+      - ADOPipelineDocException: If there is an error in parsing the YAML content.
     """
     try:
       with open(self.yamlFile, 'r') as file:
@@ -67,6 +67,7 @@ class ADOPipelineDoc:
           raise ADOPipelineDocException(
             "YAML file is empty or contains null data.")
 
+# Rename parameters to params, AI!
         parameters = data.get('parameters', [])
 
         if not parameters:
