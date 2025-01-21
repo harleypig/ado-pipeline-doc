@@ -237,9 +237,8 @@ class ADOPipelineDoc:
     Raises:
       ADOPipelineDocException: If the file exists and both comments are missing.
     """
-    # Raise an exception if self.mdFile is not set, AI!
     if self.mdFile is None:
-      return
+      raise ADOPipelineDocException("Output file must be provided to ADOPipelineDoc.")
 
     try:
       content = self.readFile(self.mdFile)
