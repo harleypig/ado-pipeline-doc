@@ -55,6 +55,13 @@ class ADOPipelineDoc:
       printMdFile()
 
   #---------------------------------------------------------------------------
+  def mdStartStr(self):
+    return f"<!-- {self.mdStart} -->"
+
+  def mdEndStr(self):
+    return f"<!-- {self.mdEnd} -->"
+
+  #---------------------------------------------------------------------------
   def readFile(self, file_path):
     """
     Reads the content of a file.
@@ -226,6 +233,7 @@ class ADOPipelineDoc:
     self.table_rows = table_rows
 
   #---------------------------------------------------------------------------
+  # Rename printMdFile to writeMdFile, AI!
   def printMdFile(self):
     """
     Manages the markdown file based on the presence of start and end comments.
@@ -243,16 +251,15 @@ class ADOPipelineDoc:
     try:
       content = self.readFile(self.mdFile)
 
+      start_index = content.find(self.mdStartStr())
+      end_index = content.find(self.mdEndStr())
+
+      if start_index == -1 and end_index == -1:
+        raise ADOPipelineDocException(f"No start and end comments found in {mdFile}.")
+
       # Create a temporary file
       with tempfile.NamedTemporaryFile('w', delete=False) as temp_file:
         temp_file_name = temp_file.name
-
-        start_index = content.find(f"<!-- {self.mdStart} -->")
-        end_index = content.find(f"<!-- {self.mdEnd} -->")
-
-        if start_index == -1 and end_index == -1:
-          raise ADOPipelineDocException(
-            "Both start and end comments are missing in the file.")
 
         if start_index == -1 or end_index == -1:
           temp_file.write(content + "\n" + "\n".join(self.table_rows))
