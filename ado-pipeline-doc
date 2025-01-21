@@ -334,10 +334,10 @@ def parse_arguments():
     type=str,
     help='The path to the YAML file containing pipeline parameters.')
 
-# In the options output, make it show MARKDOWNFILE instead of MDFILE, AI!
   parser.add_argument(
     '--mdfile', '--markdown-file',
     type=str,
+    metavar='MARKDOWNFILE',
     help=
     'The path to the output markdown file. If not provided, output will be printed to the console.'
   )
