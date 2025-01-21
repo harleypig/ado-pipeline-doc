@@ -21,26 +21,6 @@ class ADOPipelineDocException(Exception):
 
 
 class ADOPipelineDoc:
-  def read_file(self, file_path):
-    """
-    Reads the content of a file.
-
-    Args:
-      file_path (str): The path to the file to be read.
-
-    Returns:
-      str: The content of the file.
-
-    Raises:
-      ADOPipelineDocException: If the file cannot be accessed.
-    """
-    try:
-      with open(file_path, 'r') as file:
-        return file.read()
-    except FileNotFoundError:
-      raise ADOPipelineDocException(f"Error: The file {file_path} was not found.")
-    except PermissionError:
-      raise ADOPipelineDocException(f"Error: Permission denied for file {file_path}.")
   #---------------------------------------------------------------------------
   def __init__(self, yamlFile=None, mdFile=None):
     """
@@ -73,43 +53,28 @@ class ADOPipelineDoc:
       print_to_mdFile()
 
   #---------------------------------------------------------------------------
-  def load_file(self):
+  def read_file(self, file_path):
     """
-    Loads the YAML file specified by the filename attribute and stores its
-    parsed contents in the data attribute.
+    Reads the content of a file.
+
+    Args:
+      file_path (str): The path to the file to be read.
+
+    Returns:
+      str: The content of the file.
 
     Raises:
-      - ADOPipelineDocException: If the file cannot be accessed.
-      - ADOPipelineDocException: If the YAML file is empty or contains null data.
-      - ADOPipelineDocException: If the YAML file has no parameters.
-      - ADOPipelineDocException: If there is an error in parsing the YAML content.
+      ADOPipelineDocException: If the file cannot be accessed.
     """
     try:
-      content = self.read_file(self.yamlFile)
-      data = yaml.safe_load(content)
-
-        if data is None:
-          raise ADOPipelineDocException(
-            "YAML file is empty or contains null data.")
-
-        params = data.get('parameters', [])
-
-        if not params:
-          raise ADOPipelineDocException("YAML file has no parameters.")
-
-        self.data = data
-        self.parameters = params
+      with open(file_path, 'r') as file:
+        return file.read()
 
     except FileNotFoundError:
-      raise ADOPipelineDocException(
-        f"Error: The file {self.yamlFile} was not found.")
+      raise ADOPipelineDocException(f"The file {file_path} was not found.")
 
     except PermissionError:
-      raise ADOPipelineDocException(
-        f"Error: Permission denied for file {self.yamlFile}.")
-
-    except yaml.YAMLError as exc:
-      raise ADOPipelineDocException(f"Error parsing YAML file: {exc}")
+      raise ADOPipelineDocException(f"Permission denied for file {file_path}.")
 
   #---------------------------------------------------------------------------
   def prettify(self, obj, key=None):
@@ -134,6 +99,38 @@ class ADOPipelineDoc:
       pretty = yaml.dump(obj, default_flow_style=False)
 
     return pretty.strip().replace('\n', '<br/>')
+
+  #---------------------------------------------------------------------------
+  # Rename load_file to parseYAML, AI!
+  def load_file(self):
+    """
+    Loads the YAML file specified by the filename attribute and stores its
+    parsed contents in the data attribute.
+
+    Raises:
+      - ADOPipelineDocException: If the file cannot be accessed.
+      - ADOPipelineDocException: If the YAML file is empty or contains null data.
+      - ADOPipelineDocException: If the YAML file has no parameters.
+      - ADOPipelineDocException: If there is an error in parsing the YAML content.
+    """
+    try:
+      content = self.read_file(self.yamlFile)
+      data = yaml.safe_load(content)
+
+      if data is None:
+        raise ADOPipelineDocException(
+          "YAML file is empty or contains null data.")
+
+      params = data.get('parameters', [])
+
+      if not params:
+        raise ADOPipelineDocException("YAML file has no parameters.")
+
+      self.data = data
+      self.parameters = params
+
+    except yaml.YAMLError as exc:
+      raise ADOPipelineDocException(f"Error parsing YAML file: {exc}")
 
   #---------------------------------------------------------------------------
   def process_data(self):
