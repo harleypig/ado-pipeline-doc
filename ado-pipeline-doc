@@ -86,6 +86,7 @@ class ADOPipelineDoc:
 
   #---------------------------------------------------------------------------
   def readFile(self, file_path):
+    # Ensure the documentation is accurate for this function, AI!
     """
     Reads the content of a file.
 
