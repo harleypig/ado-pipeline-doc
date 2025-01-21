@@ -143,6 +143,7 @@ class ADOPipelineDoc:
       raise ADOPipelineDocException(f"Error parsing YAML file: {e}")
 
   #---------------------------------------------------------------------------
+  # Rename process_data to processData, AI!
   def process_data(self):
     """
     Processes the YAML parameters and converts them into a markdown table format.
