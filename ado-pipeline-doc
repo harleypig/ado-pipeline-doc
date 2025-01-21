@@ -142,7 +142,6 @@ class ADOPipelineDoc:
     return pretty.strip().replace('\n', '<br/>')
 
   #---------------------------------------------------------------------------
-  # Ensure the documentation is accurate for this function, AI!
   def parseYAML(self):
     """
     Loads the YAML file specified by the filename attribute and stores its
@@ -156,24 +155,24 @@ class ADOPipelineDoc:
     """
     try:
       content = self.readFile(self.yamlFile)
-      data = yaml.safe_load(content)
+      self.data = yaml.safe_load(content)
 
-      if data is None:
+      if self.data is None:
         raise ADOPipelineDocException(
           "YAML file is empty or contains null data.")
 
-      params = data.get('parameters', [])
+      params = self.data.get('parameters', [])
 
       if not params:
         raise ADOPipelineDocException("YAML file has no parameters.")
 
-      self.data = data
       self.parameters = params
 
     except yaml.YAMLError as e:
       raise ADOPipelineDocException(f"Error parsing YAML file: {e}")
 
   #---------------------------------------------------------------------------
+  # Ensure the documentation is accurate for this function, AI!
   def processData(self):
     """
     Processes the YAML parameters and converts them into a markdown table format.
