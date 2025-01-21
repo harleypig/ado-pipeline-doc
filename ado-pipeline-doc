@@ -240,6 +240,7 @@ class ADOPipelineDoc:
 
     try:
       content = self.readFile(self.mdFile)
+      # Use a temporary file until done writing and then mv the temp file to mdFile if successful, AI!
       with open(self.mdFile, 'r+') as file:
 
         start_index = content.find(f"<!-- {self.mdStart} -->")
