@@ -62,8 +62,7 @@ class ADOPipelineDoc:
     return f"<!-- {self.mdEnd} -->"
 
   def printTable(self):
-    # This is a perl construct. Make it correct for python, AI!
-    print(f"{self.mdStartStr}") if self.mdFile is None
+    print(self.mdStartStr())
 
   #---------------------------------------------------------------------------
   def readFile(self, file_path):
