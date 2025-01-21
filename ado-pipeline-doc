@@ -62,10 +62,7 @@ class ADOPipelineDoc:
     return f"<!-- {self.mdEnd} -->"
 
   def printTable(self):
-    # Make this a correct one-liner, AI!
-    print(f"{self.mdStartStr}") if self.mdFile is None
-
-#    print("\n".join(self.table_rows))
+    print(f"{self.mdStartStr()}\n{'\n'.join(self.table_rows)}")
   #---------------------------------------------------------------------------
   def readFile(self, file_path):
     """
