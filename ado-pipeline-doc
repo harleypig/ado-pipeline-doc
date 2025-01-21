@@ -20,10 +20,12 @@ import os
 import tempfile
 
 
+##############################################################################
 class ADOPipelineDocException(Exception):
   pass
 
 
+##############################################################################
 class ADOPipelineDoc:
   #---------------------------------------------------------------------------
   def __init__(self, yamlFile=None, mdFile=None):
@@ -130,7 +132,8 @@ class ADOPipelineDoc:
     """
     if key is not None:
       if not isinstance(obj, dict):
-        raise ADOPipelineDocException("Object must be a dictionary if a key is provided.")
+        raise ADOPipelineDocException(
+          "Object must be a dictionary if a key is provided.")
 
       if key not in obj:
         raise ADOPipelineDocException(f"Key '{key}' not found in the object.")
@@ -315,6 +318,7 @@ class ADOPipelineDoc:
         file.write("\n".join(self.table_rows))
 
 
+##############################################################################
 def parse_arguments():
   """
   Parses command line arguments for the script.
@@ -322,11 +326,25 @@ def parse_arguments():
   Returns:
     Namespace: The parsed arguments as a namespace object.
   """
-  parser = argparse.ArgumentParser(description='Process YAML and generate markdown documentation.')
-  parser.add_argument('yamlFile', type=str, help='The path to the YAML file containing pipeline parameters.')
-  parser.add_argument('--mdFile', type=str, help='The path to the output markdown file. If not provided, output will be printed to the console.')
+  parser = argparse.ArgumentParser(
+    description='Process YAML and generate markdown documentation.')
+
+  parser.add_argument(
+    'yamlFile',
+    type=str,
+    help='The path to the YAML file containing pipeline parameters.')
+
+  parser.add_argument(
+    '--mdFile',
+    type=str,
+    help=
+    'The path to the output markdown file. If not provided, output will be printed to the console.'
+  )
+
   return parser.parse_args()
 
+
+##############################################################################
 if __name__ == "__main__":
   args = parse_arguments()
   ADOPipelineDoc(args.yamlFile, args.mdFile)
