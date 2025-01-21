@@ -53,8 +53,7 @@ class ADOPipelineDoc:
       print_to_mdFile()
 
   #---------------------------------------------------------------------------
-  # Rename read_file to readFile, AI!
-  def read_file(self, file_path):
+  def readFile(self, file_path):
     """
     Reads the content of a file.
 
@@ -114,7 +113,7 @@ class ADOPipelineDoc:
       - ADOPipelineDocException: If there is an error in parsing the YAML content.
     """
     try:
-      content = self.read_file(self.yamlFile)
+      content = self.readFile(self.yamlFile)
       data = yaml.safe_load(content)
 
       if data is None:
@@ -238,7 +237,7 @@ class ADOPipelineDoc:
       return
 
     try:
-      content = self.read_file(self.mdFile)
+      content = self.readFile(self.mdFile)
       with open(self.mdFile, 'r+') as file:
 
         start_index = content.find(f"<!-- {self.mdStart} -->")
