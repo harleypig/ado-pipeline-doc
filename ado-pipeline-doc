@@ -53,6 +53,7 @@ class ADOPipelineDoc:
       print_to_mdFile()
 
   #---------------------------------------------------------------------------
+  # Rename read_file to readFile, AI!
   def read_file(self, file_path):
     """
     Reads the content of a file.
