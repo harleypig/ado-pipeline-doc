@@ -126,21 +126,7 @@ class ADOPipelineDoc:
         - If a key is passed and the object is not a dictionary.
         - If the key is not found in the object.
     """
-    """
-    Converts a given object to a pretty-printed string format.
-
-    Args:
-      obj (any): The object to be converted to a string.
-      key (str, optional): The key associated with the object.
-
-    Returns:
-      str: A pretty-printed string representation of the object.
-
-    Raises:
-      ADOPipelineDocException:
-        - If a key is passed and the object is not a dictionary.
-        - If the key is not found in the object.
-    """
+    # Handle the errors as documented, AI!
     if key is not None:
       pretty = yaml.dump(obj[key], default_flow_style=False)
 
