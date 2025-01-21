@@ -111,7 +111,21 @@ class ADOPipelineDoc:
 
   #---------------------------------------------------------------------------
   def prettyObject(self, obj, key=None):
-    # Ensure the documentation is accurate for this function, AI!
+    """
+    Converts a given object to a pretty-printed string format.
+
+    Args:
+      obj (any): The object to be converted to a string.
+      key (str, optional): The key associated with the object.
+
+    Returns:
+      str: A pretty-printed string representation of the object.
+
+    Raises:
+      ADOPipelineDocException:
+        - If a key is passed and the object is not a dictionary.
+        - If the key is not found in the object.
+    """
     """
     Converts a given object to a pretty-printed string format.
 
