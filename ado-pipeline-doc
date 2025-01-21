@@ -67,14 +67,13 @@ class ADOPipelineDoc:
           raise ADOPipelineDocException(
             "YAML file is empty or contains null data.")
 
-# Rename parameters to params, AI!
-        parameters = data.get('parameters', [])
+        params = data.get('parameters', [])
 
-        if not parameters:
+        if not params:
           raise ADOPipelineDocException("YAML file has no parameters.")
 
         self.data = data
-        self.parameters = parameters
+        self.parameters = params
 
     except FileNotFoundError:
       raise ADOPipelineDocException(
