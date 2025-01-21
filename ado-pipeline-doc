@@ -75,6 +75,7 @@ class ADOPipelineDoc:
     return f"<!-- {self.mdEnd} -->"
 
   def printTable(self):
+    # Ensure the documentation is accurate for this function, AI!
     print("\n".join(self.table_rows))
 
   #---------------------------------------------------------------------------
