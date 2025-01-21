@@ -15,7 +15,6 @@
     "ms-python.python",
     "ms-python.debugpy",
     "ionutvmi.reg",
-    "snyk-security.snyk-vulnerability-scanner",
     "vscodevim.vim",
     "ms-vscode-remote.remote-wsl",
     "xiyaowong.font-profile",
