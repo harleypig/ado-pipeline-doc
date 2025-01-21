@@ -54,8 +54,14 @@ class ADOPipelineDoc:
     self.writeFile()
 
   #---------------------------------------------------------------------------
-  # Ensure the documentation is accurate for this function, AI!
   def mdStartStr(self):
+    """
+    Returns the markdown start string used to denote the beginning of the
+    ADOPipelineDoc section in the markdown file.
+
+    Returns:
+      str: The markdown start string.
+    """
     return f"<!-- {self.mdStart} -->"
 
   def mdEndStr(self):
