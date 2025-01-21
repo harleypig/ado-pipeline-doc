@@ -26,14 +26,15 @@ class ADOPipelineDocException(Exception):
 class ADOPipelineDoc:
   #---------------------------------------------------------------------------
   def __init__(self, yamlFile=None, mdFile=None):
-    # Ensure the documentation is accurate for this function, AI!
     """
     Initializes the ADOPipelineDoc with a given YAML input file and an
     optional output file.
 
     Args:
       yamlFile (str): The path to the YAML file containing pipeline parameters.
-      mdFile (str, optional): The path to the output file where the processed data will be saved.
+      mdFile (str, optional): The path to the output file where the processed
+                              data will be saved. If not provided, the output
+                              will be printed to the console.
 
     Raises:
       ADOPipelineDocException: If no input file is provided.
