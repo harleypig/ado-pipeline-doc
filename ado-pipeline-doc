@@ -347,4 +347,5 @@ def parse_arguments():
 ##############################################################################
 if __name__ == "__main__":
   args = parse_arguments()
+  # Handle this class custom exceptions by printing the error out with no stacktrace, AI!
   ADOPipelineDoc(args.yamlFile, args.mdFile)
