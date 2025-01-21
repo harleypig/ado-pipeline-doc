@@ -13,6 +13,7 @@
 # Note: There is no native way in azure pipelines to enforce an object's
 #       structure.
 
+import argparse
 import yaml
 import sys
 import os
@@ -315,5 +316,10 @@ class ADOPipelineDoc:
 
 
 if __name__ == "__main__":
-  # Add handling for yamlFile and mdFile options as command line flags, AI!
-  ADOPipelineDoc('azure-pipelines.yml')
+  parser = argparse.ArgumentParser(description='Process YAML and generate markdown documentation.')
+  parser.add_argument('yamlFile', type=str, help='The path to the YAML file containing pipeline parameters.')
+  parser.add_argument('--mdFile', type=str, help='The path to the output markdown file. If not provided, output will be printed to the console.')
+
+  args = parser.parse_args()
+
+  ADOPipelineDoc(args.yamlFile, args.mdFile)
