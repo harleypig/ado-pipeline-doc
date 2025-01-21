@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Make the virtual environment setup and upgrade run silently, AI!
 # Check if the virtual environment directory exists
 if [ ! -d "venv" ]; then
   # Create a virtual environment
@@ -11,8 +10,8 @@ fi
 source venv/bin/activate
 
 # Upgrade pip and install/upgrade packages from requirements.txt
-pip install --upgrade pip
-pip install --upgrade -r requirements.txt
+pip install --upgrade pip -q
+pip install --upgrade -r requirements.txt -q
 
 # Run the ado-pipeline-doc script with any passed arguments
 python ado-pipeline-doc "$@"
