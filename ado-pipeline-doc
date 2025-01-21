@@ -65,6 +65,7 @@ class ADOPipelineDoc:
     return f"<!-- {self.mdStart} -->"
 
   def mdEndStr(self):
+    # Ensure the documentation is accurate for this function, AI!
     return f"<!-- {self.mdEnd} -->"
 
   def printTable(self):
