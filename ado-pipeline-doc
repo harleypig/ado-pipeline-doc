@@ -49,10 +49,10 @@ class ADOPipelineDoc:
     self.parseYAML()
     self.processData()
 
-    if mdFile is None:
+    if self.mdFile is None:
       print("\n".join(self.table_rows))
     else:
-      writeFile()
+      self.writeFile()
 
   #---------------------------------------------------------------------------
   def mdStartStr(self):
@@ -61,6 +61,10 @@ class ADOPipelineDoc:
   def mdEndStr(self):
     return f"<!-- {self.mdEnd} -->"
 
+  def printTable(self):
+    # Make this a correct one liner for perl, AI!
+    print(f"{self.mdStartStr}") if self.mdFile is None
+    print("\n".join(self.table_rows))
   #---------------------------------------------------------------------------
   def readFile(self, file_path):
     """
