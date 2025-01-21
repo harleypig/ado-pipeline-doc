@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Make the virtual environment setup and upgrade run silently, AI!
 # Check if the virtual environment directory exists
 if [ ! -d "venv" ]; then
   # Create a virtual environment
