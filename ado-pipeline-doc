@@ -65,7 +65,13 @@ class ADOPipelineDoc:
     return f"<!-- {self.mdStart} -->"
 
   def mdEndStr(self):
-    # Ensure the documentation is accurate for this function, AI!
+    """
+    Returns the markdown end string used to denote the end of the
+    ADOPipelineDoc section in the markdown file.
+
+    Returns:
+      str: The markdown end string.
+    """
     return f"<!-- {self.mdEnd} -->"
 
   def printTable(self):
