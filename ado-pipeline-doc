@@ -52,7 +52,7 @@ class ADOPipelineDoc:
     if mdFile is None:
       print("\n".join(self.table_rows))
     else:
-      printMdFile()
+      writeMdFile()
 
   #---------------------------------------------------------------------------
   def mdStartStr(self):
@@ -233,8 +233,7 @@ class ADOPipelineDoc:
     self.table_rows = table_rows
 
   #---------------------------------------------------------------------------
-  # Rename printMdFile to writeMdFile, AI!
-  def printMdFile(self):
+  def writeMdFile(self):
     """
     Manages the markdown file based on the presence of start and end comments.
     If the file doesn't exist, it creates a new file and writes the data.
