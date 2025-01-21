@@ -19,8 +19,6 @@ The script includes custom error handling to manage various exceptions that may 
 - If a parameter is missing required fields such as 'name' or 'type'.
 - If the output markdown file exists but lacks the necessary start or end comments.
 
-These exceptions help in identifying specific issues and provide clear error messages to the user.
-
 ## Requirements
 
 - Python 3.x
@@ -35,6 +33,7 @@ These exceptions help in identifying specific issues and provide clear error mes
    cd <repository-directory>
    ```
 
+# Include a recommendation to use a virtual environment, AI!
 2. Install the required Python packages:
 
    ```bash
