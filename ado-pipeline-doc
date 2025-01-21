@@ -54,6 +54,7 @@ class ADOPipelineDoc:
     self.writeFile()
 
   #---------------------------------------------------------------------------
+  # Ensure the documentation is accurate for this function, AI!
   def mdStartStr(self):
     return f"<!-- {self.mdStart} -->"
 
