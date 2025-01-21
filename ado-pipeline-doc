@@ -34,11 +34,12 @@ class ADOPipelineDoc:
     Raises:
         ADOPipelineDocException: If no input file is provided.
     """
-    self.yamlFile = yamlFile
-    self.mdFile = mdFile
     self.data = None
-    self.md_start = 'ADOPipelineDoc Start'
+    self.mdFile = mdFile
+    # Rename md_end to mdEnd, AI!
     self.md_end = 'ADOPipelineDoc End'
+    self.md_start = 'ADOPipelineDoc Start'
+    self.yamlFile = yamlFile
 
     if self.yamlFile is None:
       raise ADOPipelineDocException(
@@ -46,7 +47,6 @@ class ADOPipelineDoc:
 
     self.load_file()
     self.process_data()
-    self.manage_md_file()
 
   #---------------------------------------------------------------------------
   def load_file(self):
@@ -114,16 +114,16 @@ class ADOPipelineDoc:
   #---------------------------------------------------------------------------
   def process_data(self):
     """
-        Processes the YAML parameters and converts them into a markdown table format.
+    Processes the YAML parameters and converts them into a markdown table format.
 
-        This method checks each parameter for required fields and optional fields like
-        displayName, values, and default. It constructs a markdown table with headers
-        and rows representing each parameter's details. The table is stored in the
-        table_rows attribute for further use.
+    This method checks each parameter for required fields and optional fields like
+    displayName, values, and default. It constructs a markdown table with headers
+    and rows representing each parameter's details. The table is stored in the
+    table_rows attribute for further use.
 
-        Raises:
-            ADOPipelineDocException: If a parameter is missing 'name' or 'type'.
-        """
+    Raises:
+        ADOPipelineDocException: If a parameter is missing 'name' or 'type'.
+    """
     heading_order = [
       'required', 'name', 'type', 'displayName', 'values', 'default'
     ]
@@ -202,6 +202,7 @@ class ADOPipelineDoc:
     table_rows.append(f"<!-- {self.md_end} -->")
     self.table_rows = table_rows
 
+  #---------------------------------------------------------------------------
   def manage_md_file(self):
     """
     Manages the markdown file based on the presence of start and end comments.
@@ -244,6 +245,8 @@ class ADOPipelineDoc:
     except FileNotFoundError:
         with open(self.mdFile, 'w') as file:
             file.write("\n".join(self.table_rows))
+
+  def print_table_rows(self):
     """
     Prints the markdown table rows to stdout.
     """
