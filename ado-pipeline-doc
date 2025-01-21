@@ -207,9 +207,7 @@ class ADOPipelineDoc:
     """
     Prints the markdown table rows to stdout.
     """
-    # Convert this to a oneliner, AI!
-    for row in self.table_rows:
-      print(row)
+    print("\n".join(self.table_rows))
 
   #---------------------------------------------------------------------------
   def manage_md_file(self):
