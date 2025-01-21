@@ -21,6 +21,7 @@ class ADOPipelineDocException(Exception):
 
 
 class ADOPipelineDoc:
+  # Abstract the file open for reading code to conform to DRY, AI!
   #---------------------------------------------------------------------------
   def __init__(self, yamlFile=None, mdFile=None):
     """
@@ -46,7 +47,11 @@ class ADOPipelineDoc:
 
     self.load_file()
     self.process_data()
-    
+
+    if mdFile is None:
+      print("\n".join(self.table_rows))
+    else:
+      print_to_mdFile()
 
   #---------------------------------------------------------------------------
   def load_file(self):
@@ -182,7 +187,7 @@ class ADOPipelineDoc:
         for row in rows:
           row.pop(key, None)
 
-    table_rows = [f"<!-- {self.mdStart} -->"]
+    table_rows = []
 
     # Build the markdown header row
     header_row = "| " + " | ".join(heading_order) + " |"
@@ -199,18 +204,10 @@ class ADOPipelineDoc:
       row_text = "| " + " | ".join(row_data) + " |"
       table_rows.append(row_text)
 
-    table_rows.append(f"<!-- {self.mdEnd} -->")
     self.table_rows = table_rows
 
   #---------------------------------------------------------------------------
-  def print_to_stdout(self):
-    """
-    Prints the markdown table rows to stdout.
-    """
-    print("\n".join(self.table_rows))
-
-  #---------------------------------------------------------------------------
-  def manage_md_file(self):
+  def print_to_mdFile(self):
     """
     Manages the markdown file based on the presence of start and end comments.
     If the file doesn't exist, it creates a new file and writes the data.
@@ -250,6 +247,5 @@ class ADOPipelineDoc:
         file.write("\n".join(self.table_rows))
 
 
-
 if __name__ == "__main__":
-  ADOPipelineDoc('azure-pipelines.yml').print_to_stdout()
+  ADOPipelineDoc('azure-pipelines.yml')
