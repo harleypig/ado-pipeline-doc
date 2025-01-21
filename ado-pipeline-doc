@@ -32,7 +32,7 @@ class ADOPipelineDoc:
       mdFile (str, optional): The path to the output file where the processed data will be saved.
 
     Raises:
-        ADOPipelineDocException: If no input file is provided.
+      ADOPipelineDocException: If no input file is provided.
     """
     self.data = None
     self.mdEnd = 'ADOPipelineDoc End'
@@ -74,7 +74,8 @@ class ADOPipelineDoc:
       raise ADOPipelineDocException(f"The file {file_path} was not found.")
 
     except PermissionError:
-      raise ADOPipelineDocException(f"Permission denied for file {file_path}.")
+      raise ADOPipelineDocException(
+        f"Permission denied for file {file_path}.")
 
   #---------------------------------------------------------------------------
   def prettyObject(self, obj, key=None):
@@ -89,8 +90,9 @@ class ADOPipelineDoc:
       str: A pretty-printed string representation of the object.
 
     Raises:
-      ADOPipelineDocException: If a key is passed and the object is not a dictionary.
-      ADOPipelineDocException: If the key is not found in the object.
+      ADOPipelineDocException:
+        - If a key is passed and the object is not a dictionary.
+        - If the key is not found in the object.
     """
     if key is not None:
       pretty = yaml.dump(obj[key], default_flow_style=False)
@@ -107,10 +109,10 @@ class ADOPipelineDoc:
     parsed contents in the data attribute.
 
     Raises:
-      - ADOPipelineDocException: If the file cannot be accessed.
-      - ADOPipelineDocException: If the YAML file is empty or contains null data.
-      - ADOPipelineDocException: If the YAML file has no parameters.
-      - ADOPipelineDocException: If there is an error in parsing the YAML content.
+      ADOPipelineDocException:
+        - If the YAML file is empty or contains null data.
+        - If the YAML file has no parameters.
+        - If there is an error in parsing the YAML content.
     """
     try:
       content = self.readFile(self.yamlFile)
@@ -128,18 +130,18 @@ class ADOPipelineDoc:
       self.data = data
       self.parameters = params
 
-    except yaml.YAMLError as exc:
-      raise ADOPipelineDocException(f"Error parsing YAML file: {exc}")
+    except yaml.YAMLError as e:
+      raise ADOPipelineDocException(f"Error parsing YAML file: {e}")
 
   #---------------------------------------------------------------------------
   def process_data(self):
     """
     Processes the YAML parameters and converts them into a markdown table format.
 
-    This method checks each parameter for required fields and optional fields like
-    displayName, values, and default. It constructs a markdown table with headers
-    and rows representing each parameter's details. The table is stored in the
-    table_rows attribute for further use.
+    This method checks each parameter for required fields and optional fields
+    like displayName, values, and default. It constructs a markdown table with
+    headers and rows representing each parameter's details. The table is stored
+    in the table_rows attribute.
 
     Raises:
       ADOPipelineDocException: If a parameter is missing 'name' or 'type'.
@@ -222,6 +224,7 @@ class ADOPipelineDoc:
     self.table_rows = table_rows
 
   #---------------------------------------------------------------------------
+  # Rename this function to printMdFile, AI!
   def print_to_mdFile(self):
     """
     Manages the markdown file based on the presence of start and end comments.
