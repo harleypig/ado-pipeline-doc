@@ -8,6 +8,8 @@ This script processes an Azure DevOps pipeline YAML file and generates markdown 
 - Generates markdown tables with parameter details.
 - Supports optional output to a markdown file or console.
 
+# Add a section giving general information about the errors this script handles, AI!
+
 ## Requirements
 
 - Python 3.x
