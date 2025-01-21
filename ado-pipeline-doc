@@ -77,6 +77,7 @@ class ADOPipelineDoc:
       raise ADOPipelineDocException(f"Permission denied for file {file_path}.")
 
   #---------------------------------------------------------------------------
+  # Rename prettify to prettyObject, AI!
   def prettify(self, obj, key=None):
     """
     Converts a given object to a pretty-printed string format.
