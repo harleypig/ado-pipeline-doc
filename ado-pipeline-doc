@@ -46,6 +46,7 @@ class ADOPipelineDoc:
 
     self.load_file()
     self.process_data()
+    self.manage_md_file()
 
   #---------------------------------------------------------------------------
   def load_file(self):
@@ -201,7 +202,48 @@ class ADOPipelineDoc:
     table_rows.append(f"<!-- {self.md_end} -->")
     self.table_rows = table_rows
 
-  def print_table_rows(self):
+  def manage_md_file(self):
+    """
+    Manages the markdown file based on the presence of start and end comments.
+    If the file doesn't exist, it creates a new file and writes the data.
+    If the file exists but has no comments, it appends the data to the end.
+    If the file exists and both comments are missing, raises an error.
+    Replaces existing text between comments with the data.
+    
+    Raises:
+        ADOPipelineDocException: If the file exists and both comments are missing.
+    """
+    if self.mdFile is None:
+        return
+
+    try:
+        with open(self.mdFile, 'r+') as file:
+            content = file.read()
+
+            start_index = content.find(f"<!-- {self.md_start} -->")
+            end_index = content.find(f"<!-- {self.md_end} -->")
+
+            if start_index == -1 and end_index == -1:
+                raise ADOPipelineDocException(
+                    "Both start and end comments are missing in the file."
+                )
+
+            if start_index == -1 or end_index == -1:
+                file.seek(0, 2)  # Move to the end of the file
+                file.write("\n" + "\n".join(self.table_rows))
+            else:
+                new_content = (
+                    content[:start_index] +
+                    "\n".join(self.table_rows) +
+                    content[end_index + len(f"<!-- {self.md_end} -->"):]
+                )
+                file.seek(0)
+                file.write(new_content)
+                file.truncate()
+
+    except FileNotFoundError:
+        with open(self.mdFile, 'w') as file:
+            file.write("\n".join(self.table_rows))
     """
     Prints the markdown table rows to stdout.
     """
