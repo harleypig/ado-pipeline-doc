@@ -172,8 +172,18 @@ class ADOPipelineDoc:
       raise ADOPipelineDocException(f"Error parsing YAML file: {e}")
 
   #---------------------------------------------------------------------------
-  # Ensure the documentation is accurate for this function, AI!
   def processData(self):
+    """
+    Processes the YAML parameters and converts them into a markdown table format.
+
+    This method checks each parameter for required fields and optional fields
+    like displayName, values, and default. It constructs a markdown table with
+    headers and rows representing each parameter's details. The table is stored
+    in the table_rows attribute.
+
+    Raises:
+      ADOPipelineDocException: If a parameter is missing 'name' or 'type'.
+    """
     """
     Processes the YAML parameters and converts them into a markdown table format.
 
