@@ -37,8 +37,7 @@ class ADOPipelineDoc:
     self.data = None
     self.mdFile = mdFile
     self.mdEnd = 'ADOPipelineDoc End'
-    # Rename md_start to mdStart, AI!
-    self.md_start = 'ADOPipelineDoc Start'
+    self.mdStart = 'ADOPipelineDoc Start'
     self.yamlFile = yamlFile
 
     if self.yamlFile is None:
@@ -182,7 +181,7 @@ class ADOPipelineDoc:
         for row in rows:
           row.pop(key, None)
 
-    table_rows = [f"<!-- {self.md_start} -->"]
+    table_rows = [f"<!-- {self.mdStart} -->"]
 
     # Build the markdown header row
     header_row = "| " + " | ".join(heading_order) + " |"
@@ -221,7 +220,7 @@ class ADOPipelineDoc:
         with open(self.mdFile, 'r+') as file:
             content = file.read()
 
-            start_index = content.find(f"<!-- {self.md_start} -->")
+            start_index = content.find(f"<!-- {self.mdStart} -->")
             end_index = content.find(f"<!-- {self.mdEnd} -->")
 
             if start_index == -1 and end_index == -1:
