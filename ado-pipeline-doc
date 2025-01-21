@@ -98,18 +98,6 @@ class ADOPipelineDoc:
     Raises:
       ADOPipelineDocException: If the file cannot be accessed.
     """
-    """
-    Reads the content of a file.
-
-    Args:
-      file_path (str): The path to the file to be read.
-
-    Returns:
-      str: The content of the file.
-
-    Raises:
-      ADOPipelineDocException: If the file cannot be accessed.
-    """
     try:
       with open(file_path, 'r') as file:
         return file.read()
@@ -123,6 +111,7 @@ class ADOPipelineDoc:
 
   #---------------------------------------------------------------------------
   def prettyObject(self, obj, key=None):
+    # Ensure the documentation is accurate for this function, AI!
     """
     Converts a given object to a pretty-printed string format.
 
