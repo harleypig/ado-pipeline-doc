@@ -19,7 +19,7 @@ The script includes custom error handling to manage various exceptions that may 
 - If a parameter is missing required fields such as 'name' or 'type'.
 - If the output markdown file exists but lacks the necessary start or end comments.
 
-# For the above, explain that having one or the other comment, but not both, causes an error. Otherwise, the table is appended to the end of the file, AI!
+If the output markdown file exists and contains only one of the start or end comments, an error will be raised. This ensures that the table is correctly inserted between the specified comments. If neither comment is present, the table is appended to the end of the file.
 
 ## Requirements
 
