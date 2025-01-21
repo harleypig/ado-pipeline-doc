@@ -33,8 +33,14 @@ The script includes custom error handling to manage various exceptions that may 
    cd <repository-directory>
    ```
 
-# Include a recommendation to use a virtual environment, AI!
-2. Install the required Python packages:
+2. It is recommended to use a virtual environment to manage dependencies. You can create and activate a virtual environment with the following commands:
+
+   ```bash
+   python -m venv venv
+   .\venv\Scripts\activate
+   ```
+
+3. Install the required Python packages:
 
    ```bash
    pip install -r requirements.txt
