@@ -304,7 +304,7 @@ class ADOPipelineDoc:
 
         else:
           new_content = (content[:start_index] + "\n".join(self.table_rows) +
-                         content[end_index + len(f"<!-- {self.mdEnd} -->"):])
+                         content[end_index + len(f"{self.mdEndStr}"):])
           temp_file.write(new_content)
 
       os.replace(temp_file_name, self.mdFile)
@@ -315,4 +315,5 @@ class ADOPipelineDoc:
 
 
 if __name__ == "__main__":
+  # Add handling for yamlFile and mdFile options as command line flags, AI!
   ADOPipelineDoc('azure-pipelines.yml')
