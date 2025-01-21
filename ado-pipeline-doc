@@ -316,6 +316,7 @@ class ADOPipelineDoc:
 
 
 if __name__ == "__main__":
+  # Put the argument handler in a function outside of the class, AI!
   parser = argparse.ArgumentParser(description='Process YAML and generate markdown documentation.')
   parser.add_argument('yamlFile', type=str, help='The path to the YAML file containing pipeline parameters.')
   parser.add_argument('--mdFile', type=str, help='The path to the output markdown file. If not provided, output will be printed to the console.')
