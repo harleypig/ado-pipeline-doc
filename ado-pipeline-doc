@@ -318,7 +318,7 @@ class ADOPipelineDoc:
 
     except FileNotFoundError:
       with open(self.mdFile, 'w') as file:
-        file.write("\n".join(self.table_rows))
+        file.write("\n".join(self.table_rows) + "\n")
 
 
 ##############################################################################
