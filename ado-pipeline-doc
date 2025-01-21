@@ -86,7 +86,18 @@ class ADOPipelineDoc:
 
   #---------------------------------------------------------------------------
   def readFile(self, file_path):
-    # Ensure the documentation is accurate for this function, AI!
+    """
+    Reads the content of a file.
+
+    Args:
+      file_path (str): The path to the file to be read.
+
+    Returns:
+      str: The content of the file.
+
+    Raises:
+      ADOPipelineDocException: If the file cannot be accessed.
+    """
     """
     Reads the content of a file.
 
