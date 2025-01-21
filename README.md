@@ -19,6 +19,8 @@ The script includes custom error handling to manage various exceptions that may 
 - If a parameter is missing required fields such as 'name' or 'type'.
 - If the output markdown file exists but lacks the necessary start or end comments.
 
+# For the above, explain that having one or the other comment, but not both, causes an error. Otherwise, the table is appended to the end of the file, AI!
+
 ## Requirements
 
 - Python 3.x
