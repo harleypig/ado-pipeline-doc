@@ -44,7 +44,7 @@ class ADOPipelineDoc:
       raise ADOPipelineDocException(
         "Input file must be provided to ADOPipelineDoc.")
 
-    self.load_file()
+    self.parseYAML()
     self.process_data()
 
     if mdFile is None:
@@ -101,8 +101,7 @@ class ADOPipelineDoc:
     return pretty.strip().replace('\n', '<br/>')
 
   #---------------------------------------------------------------------------
-  # Rename load_file to parseYAML, AI!
-  def load_file(self):
+  def parseYAML(self):
     """
     Loads the YAML file specified by the filename attribute and stores its
     parsed contents in the data attribute.
