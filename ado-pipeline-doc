@@ -177,11 +177,10 @@ class ADOPipelineDoc:
     Processes the YAML parameters and converts them into a markdown table
     format.
 
-# This paragraph is incorrect. This function creates each row in the table, but leaves them in an array. Please fix that, AI!
     This method checks each parameter for required fields and optional fields
-    like displayName, values, and default. It constructs a markdown table with
-    headers and rows representing each parameter's details. The table is stored
-    in the table_rows attribute.
+    like displayName, values, and default. It creates each row in the table and
+    stores them in the table_rows attribute as an array. The table includes
+    headers and rows representing each parameter's details.
 
     Raises:
       ADOPipelineDocException: If a parameter is missing 'name' or 'type'.
