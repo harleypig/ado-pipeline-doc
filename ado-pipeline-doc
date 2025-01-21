@@ -275,8 +275,10 @@ class ADOPipelineDoc:
                          content[end_index + len(f"<!-- {self.mdEnd} -->"):])
           temp_file.write(new_content)
 
-      # Handle common errors for this operation, AI!
-      os.replace(temp_file_name, self.mdFile)
+      try:
+          os.replace(temp_file_name, self.mdFile)
+      except OSError as e:
+          raise ADOPipelineDocException(f"Error replacing file: {e}")
 
     except FileNotFoundError:
       with open(self.mdFile, 'w') as file:
