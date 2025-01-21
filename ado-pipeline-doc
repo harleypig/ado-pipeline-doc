@@ -126,8 +126,11 @@ class ADOPipelineDoc:
         - If a key is passed and the object is not a dictionary.
         - If the key is not found in the object.
     """
-    # Handle the errors as documented, AI!
     if key is not None:
+      if not isinstance(obj, dict):
+        raise ADOPipelineDocException("Object must be a dictionary if a key is provided.")
+      if key not in obj:
+        raise ADOPipelineDocException(f"Key '{key}' not found in the object.")
       pretty = yaml.dump(obj[key], default_flow_style=False)
 
     else:
