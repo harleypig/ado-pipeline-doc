@@ -266,6 +266,7 @@ class ADOPipelineDoc:
     self.table_rows = table_rows
 
   #---------------------------------------------------------------------------
+  # Ensure the documentation is accurate for this function, AI!
   def writeFile(self):
     """
     Manages the markdown file based on the presence of start and end comments.
