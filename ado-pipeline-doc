@@ -119,7 +119,8 @@ class ADOPipelineDoc:
       key (str, optional): The key associated with the object.
 
     Returns:
-      str: A pretty-printed string representation of the object.
+      str: A pretty-printed string representation of the object suitable for use
+           in a markdown table.
 
     Raises:
       ADOPipelineDocException:
@@ -129,8 +130,10 @@ class ADOPipelineDoc:
     if key is not None:
       if not isinstance(obj, dict):
         raise ADOPipelineDocException("Object must be a dictionary if a key is provided.")
+
       if key not in obj:
         raise ADOPipelineDocException(f"Key '{key}' not found in the object.")
+
       pretty = yaml.dump(obj[key], default_flow_style=False)
 
     else:
@@ -139,6 +142,7 @@ class ADOPipelineDoc:
     return pretty.strip().replace('\n', '<br/>')
 
   #---------------------------------------------------------------------------
+  # Ensure the documentation is accurate for this function, AI!
   def parseYAML(self):
     """
     Loads the YAML file specified by the filename attribute and stores its
