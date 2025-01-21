@@ -75,7 +75,13 @@ class ADOPipelineDoc:
     return f"<!-- {self.mdEnd} -->"
 
   def printTable(self):
-    # Ensure the documentation is accurate for this function, AI!
+    """
+    Prints the markdown table of pipeline parameters to the console.
+
+    This function outputs the processed markdown table, which includes
+    parameter details such as name, type, and any optional fields, to the
+    console. It is used when no markdown file is specified for output.
+    """
     print("\n".join(self.table_rows))
 
   #---------------------------------------------------------------------------
