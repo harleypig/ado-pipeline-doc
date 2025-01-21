@@ -8,7 +8,18 @@ This script processes an Azure DevOps pipeline YAML file and generates markdown 
 - Generates markdown tables with parameter details.
 - Supports optional output to a markdown file or console.
 
-# Add a section giving general information about the errors this script handles, AI!
+## Error Handling
+
+The script includes custom error handling to manage various exceptions that may occur during execution. The primary custom exception used is `ADOPipelineDocException`, which is raised in the following scenarios:
+
+- If the input YAML file is not provided.
+- If the YAML file is empty or contains null data.
+- If the YAML file has no parameters.
+- If there is an error in parsing the YAML content.
+- If a parameter is missing required fields such as 'name' or 'type'.
+- If the output markdown file exists but lacks the necessary start or end comments.
+
+These exceptions help in identifying specific issues and provide clear error messages to the user.
 
 ## Requirements
 
