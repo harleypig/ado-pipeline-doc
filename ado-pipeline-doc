@@ -10,7 +10,8 @@
 # Data Types:
 # string, number, boolean, object
 
-# Note: There is no native way to enforce an object's structure.
+# Note: There is no native way in azure pipelines to enforce an object's
+#       structure.
 
 import yaml
 import sys
@@ -25,6 +26,7 @@ class ADOPipelineDocException(Exception):
 class ADOPipelineDoc:
   #---------------------------------------------------------------------------
   def __init__(self, yamlFile=None, mdFile=None):
+    # Ensure the documentation is accurate for this function, AI!
     """
     Initializes the ADOPipelineDoc with a given YAML input file and an
     optional output file.
