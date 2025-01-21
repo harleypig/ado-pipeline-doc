@@ -35,10 +35,16 @@ The script includes custom error handling to manage various exceptions that may 
 
 2. It is recommended to use a virtual environment to manage dependencies. You can create and activate a virtual environment with the following commands:
 
-# Include instructions for linux (bash), windows (powershell), and macintosh (dunno what shell mac uses), AI!
-   ```bash
+   ### Windows (PowerShell)
+   ```powershell
    python -m venv venv
-   .\venv\Scripts\activate
+   .\venv\Scripts\Activate.ps1
+   ```
+
+   ### Linux (bash) / macOS (zsh)
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
    ```
 
 3. Install the required Python packages:
