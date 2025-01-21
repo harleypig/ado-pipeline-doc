@@ -37,6 +37,7 @@ class ADOPipelineDoc:
     self.data = None
     self.mdFile = mdFile
     self.mdEnd = 'ADOPipelineDoc End'
+    # Rename md_start to mdStart, AI!
     self.md_start = 'ADOPipelineDoc Start'
     self.yamlFile = yamlFile
 
