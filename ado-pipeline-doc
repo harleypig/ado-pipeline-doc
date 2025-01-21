@@ -293,10 +293,10 @@ class ADOPipelineDoc:
       end_index = content.find(self.mdEndStr())
 
       if start_index == -1 and end_index >= -1:
-        raise ADOPipelineDocException("No start comment found.")
+        raise ADOPipelineDocException(f"No start comment found in {self.mdFile}.")
 
       if start_index >= -1 and end_index == -1:
-        raise ADOPipelineDocException("No end comment found.")
+        raise ADOPipelineDocException(f"No end comment found in {self.mdFile}.")
 
       # Create a temporary file
       with tempfile.NamedTemporaryFile('w', delete=False) as temp_file:
@@ -334,6 +334,7 @@ def parse_arguments():
     type=str,
     help='The path to the YAML file containing pipeline parameters.')
 
+# use --mdfile and allow for --markdown-file, AI!
   parser.add_argument(
     '--mdFile',
     type=str,
@@ -347,7 +348,9 @@ def parse_arguments():
 ##############################################################################
 if __name__ == "__main__":
   args = parse_arguments()
+
   try:
     ADOPipelineDoc(args.yamlFile, args.mdFile)
+
   except ADOPipelineDocException as e:
     print(f"Error: {e}")
