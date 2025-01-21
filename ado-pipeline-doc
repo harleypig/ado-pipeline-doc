@@ -48,11 +48,7 @@ class ADOPipelineDoc:
 
     self.parseYAML()
     self.processData()
-
-    if self.mdFile is None:
-      print("\n".join(self.table_rows))
-    else:
-      self.writeFile()
+    self.writeFile()
 
   #---------------------------------------------------------------------------
   def mdStartStr(self):
@@ -62,7 +58,7 @@ class ADOPipelineDoc:
     return f"<!-- {self.mdEnd} -->"
 
   def printTable(self):
-    print(self.mdStartStr())
+    print("\n".join(self.table_rows))
 
   #---------------------------------------------------------------------------
   def readFile(self, file_path):
@@ -217,6 +213,7 @@ class ADOPipelineDoc:
           row.pop(key, None)
 
     table_rows = []
+    if self.mdFile is not None: table_rows.append(f"{self.mdStartStr}")
 
     # Build the markdown header row
     header_row = "| " + " | ".join(heading_order) + " |"
@@ -233,6 +230,8 @@ class ADOPipelineDoc:
       row_text = "| " + " | ".join(row_data) + " |"
       table_rows.append(row_text)
 
+    if self.mdFile is not None: table_rows.append(f"{self.mdEndStr}")
+
     self.table_rows = table_rows
 
   #---------------------------------------------------------------------------
@@ -248,7 +247,8 @@ class ADOPipelineDoc:
       ADOPipelineDocException: If the file exists and both comments are missing.
     """
     if self.mdFile is None:
-      raise ADOPipelineDocException("Output file must be provided to ADOPipelineDoc.")
+      self.printTable()
+      return
 
     try:
       content = self.readFile(self.mdFile)
@@ -256,21 +256,26 @@ class ADOPipelineDoc:
       start_index = content.find(self.mdStartStr())
       end_index = content.find(self.mdEndStr())
 
-      if start_index == -1 and end_index == -1:
-        raise ADOPipelineDocException(f"No start and end comments found in {mdFile}.")
+      if start_index == -1 and end_index >= -1:
+        raise ADOPipelineDocException("No start comment found.")
+
+      if start_index >= -1 and end_index == -1:
+        raise ADOPipelineDocException("No end comment found.")
 
       # Create a temporary file
       with tempfile.NamedTemporaryFile('w', delete=False) as temp_file:
         temp_file_name = temp_file.name
 
-        if start_index == -1 or end_index == -1:
+        # No start or end comments, append to end of file
+        if start_index == -1 and end_index == -1:
           temp_file.write(content + "\n" + "\n".join(self.table_rows))
+
         else:
           new_content = (content[:start_index] + "\n".join(self.table_rows) +
                          content[end_index + len(f"<!-- {self.mdEnd} -->"):])
           temp_file.write(new_content)
 
-      # Replace the original file with the temporary file
+      # Handle common errors for this operation, AI!
       os.replace(temp_file_name, self.mdFile)
 
     except FileNotFoundError:
