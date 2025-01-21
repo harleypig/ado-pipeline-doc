@@ -36,8 +36,7 @@ class ADOPipelineDoc:
     """
     self.data = None
     self.mdFile = mdFile
-    # Rename md_end to mdEnd, AI!
-    self.md_end = 'ADOPipelineDoc End'
+    self.mdEnd = 'ADOPipelineDoc End'
     self.md_start = 'ADOPipelineDoc Start'
     self.yamlFile = yamlFile
 
@@ -199,7 +198,7 @@ class ADOPipelineDoc:
       row_text = "| " + " | ".join(row_data) + " |"
       table_rows.append(row_text)
 
-    table_rows.append(f"<!-- {self.md_end} -->")
+    table_rows.append(f"<!-- {self.mdEnd} -->")
     self.table_rows = table_rows
 
   #---------------------------------------------------------------------------
@@ -222,7 +221,7 @@ class ADOPipelineDoc:
             content = file.read()
 
             start_index = content.find(f"<!-- {self.md_start} -->")
-            end_index = content.find(f"<!-- {self.md_end} -->")
+            end_index = content.find(f"<!-- {self.mdEnd} -->")
 
             if start_index == -1 and end_index == -1:
                 raise ADOPipelineDocException(
@@ -236,7 +235,7 @@ class ADOPipelineDoc:
                 new_content = (
                     content[:start_index] +
                     "\n".join(self.table_rows) +
-                    content[end_index + len(f"<!-- {self.md_end} -->"):]
+                    content[end_index + len(f"<!-- {self.mdEnd} -->"):]
                 )
                 file.seek(0)
                 file.write(new_content)
