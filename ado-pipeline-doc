@@ -14,6 +14,8 @@
 
 import yaml
 import sys
+import os
+import tempfile
 
 
 class ADOPipelineDocException(Exception):
@@ -235,13 +237,12 @@ class ADOPipelineDoc:
     Raises:
       ADOPipelineDocException: If the file exists and both comments are missing.
     """
+    # Raise an exception if self.mdFile is not set, AI!
     if self.mdFile is None:
       return
 
     try:
       content = self.readFile(self.mdFile)
-      import os
-      import tempfile
 
       # Create a temporary file
       with tempfile.NamedTemporaryFile('w', delete=False) as temp_file:
