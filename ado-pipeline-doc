@@ -309,7 +309,7 @@ class ADOPipelineDoc:
           temp_file.write(content + "\n" + "\n".join(self.table_rows))
 
         else:
-          # Add the length of the end comment string to the end_index, AI!
+          end_index += len(self.mdEndStr())
           new_content = (content[:start_index] + "\n".join(self.table_rows) +
                          content[end_index:])
           temp_file.write(new_content)
