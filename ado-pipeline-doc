@@ -266,17 +266,17 @@ class ADOPipelineDoc:
     self.table_rows = table_rows
 
   #---------------------------------------------------------------------------
-  # Ensure the documentation is accurate for this function, AI!
   def writeFile(self):
     """
-    Manages the markdown file based on the presence of start and end comments.
-    If the file doesn't exist, it creates a new file and writes the data.
-    If the file exists but has no comments, it appends the data to the end.
-    If the file exists and both comments are missing, raises an error.
-    Replaces existing text between comments with the data.
-    
+    Writes the markdown table to the specified markdown file or prints it to
+    the console if no file is specified. If the file exists, it updates the
+    content between the start and end comments. If the file doesn't exist, it
+    creates a new one. Raises an exception if the file exists but lacks the
+    necessary comments.
+
     Raises:
-      ADOPipelineDocException: If the file exists and both comments are missing.
+      ADOPipelineDocException: If the file exists and lacks start or end
+      comments.
     """
     if self.mdFile is None:
       self.printTable()
